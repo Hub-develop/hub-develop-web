@@ -1,8 +1,10 @@
 import { createApp } from 'vue'
 import type { Directive } from 'vue'
 import App from './App.vue'
+import router from './router'
 import './style.css'
 
+/** 元素进入视口时加 .reveal--in，用于滚动入场动效 */
 const reveal: Directive<HTMLElement> = {
   mounted(el) {
     el.classList.add('reveal')
@@ -21,4 +23,4 @@ const reveal: Directive<HTMLElement> = {
   },
 }
 
-createApp(App).directive('reveal', reveal).mount('#app')
+createApp(App).use(router).directive('reveal', reveal).mount('#app')

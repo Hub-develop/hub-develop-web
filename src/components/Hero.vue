@@ -1,35 +1,36 @@
 <script setup lang="ts">
-const tags = [
-  '跨平台',
-  '.NET / Avalonia',
-  'Flutter',
-  'Spring Boot',
-  'Docker',
-  'TypeScript',
-  'ChromiumOS',
-]
+import { site } from '@/content/site'
+import { renderRich } from '@/utils/rich'
+
+const h = site.hero
 </script>
 
 <template>
-  <section id="top" class="hero">
+  <section class="hero">
     <div class="hero__grid grid-bg" aria-hidden="true"></div>
     <div class="container hero__inner">
       <div class="hero__copy">
-        <p class="hero__kicker">为开源开发者打造跨平台、可持续迭代的工程底座</p>
-        <p class="hero__term">
-          <span class="hero__term-user">guest@hub-develop</span><span class="hero__term-path">:~$</span>
-          whoami<span class="hero__cursor" aria-hidden="true"></span>
+        <p class="hero__kicker">{{ h.kicker }}</p>
+        <p class="prompt hero__term">
+          <span class="prompt__user">{{ h.term.user }}@{{ h.term.host }}</span
+          ><span class="prompt__path">:~$</span> {{ h.term.cmd
+          }}<span class="cursor" aria-hidden="true"></span>
         </p>
-        <h1 class="hero__title">Hub-develop</h1>
-        <p class="hero__sub">源自 CodeHub 的上游组织。</p>
+        <h1 class="hero__title">{{ h.title }}</h1>
+        <p class="hero__sub">{{ h.subtitle }}</p>
+        <p class="hero__lead" v-html="renderRich(h.lead)"></p>
+
         <ul class="hero__tags">
-          <li v-for="t in tags" :key="t" class="tag">{{ t }}</li>
+          <li v-for="t in h.tags" :key="t" class="tag">{{ t }}</li>
         </ul>
+
         <div class="hero__actions">
-          <a class="btn btn--primary" href="#projects">查看核心项目</a>
-          <a class="btn btn--ghost" href="https://github.com/Hub-develop" target="_blank" rel="noopener">
-            在 GitHub 关注
-          </a>
+          <RouterLink class="btn btn--primary" :to="h.primaryCta.to">
+            {{ h.primaryCta.label }}
+          </RouterLink>
+          <RouterLink class="btn btn--ghost" :to="h.secondaryCta.to">
+            {{ h.secondaryCta.label }}
+          </RouterLink>
         </div>
       </div>
 
@@ -39,15 +40,12 @@ const tags = [
             <span class="term__dot term__dot--r"></span>
             <span class="term__dot term__dot--y"></span>
             <span class="term__dot term__dot--g"></span>
-            <span class="term__title">hub-develop — zsh</span>
+            <span class="term__title">{{ h.terminal.title }}</span>
           </div>
-          <pre class="term__body"><span class="c-cmd">$ hub-develop --about</span>
-<span class="c-key">org</span>        <span class="c-val">Hub-develop</span>
-<span class="c-key">upstream</span>   <span class="c-val">CodeHub</span>
-<span class="c-key">focus</span>      <span class="c-val">cross-platform · server · docs · os</span>
-<span class="c-key">repos</span>      <span class="c-num">6</span> public
-<span class="c-key">status</span>     <span class="c-ok">● building</span>
-<span class="c-cmd">$ </span><span class="hero__cursor hero__cursor--sm"></span></pre>
+          <pre class="term__body"><span class="c-cmd">{{ h.terminal.cmd }}</span>
+<template v-for="row in h.terminal.rows" :key="row.key">
+<span class="c-key">{{ row.key }}</span>       <span :class="'c-' + row.kind">{{ row.value }}</span>
+</template><span class="c-cmd">$ </span><span class="cursor cursor--sm"></span></pre>
         </div>
       </div>
     </div>
@@ -80,19 +78,9 @@ const tags = [
   margin-bottom: 1.1rem;
 }
 .hero__term {
-  font-family: var(--mono);
-  font-size: 0.9rem;
-  color: var(--muted);
   margin-bottom: 0.9rem;
 }
-.hero__term-user {
-  color: var(--accent-ink);
-  font-weight: 600;
-}
-.hero__term-path {
-  color: var(--ink);
-}
-.hero__cursor {
+.cursor {
   display: inline-block;
   width: 9px;
   height: 1.05em;
@@ -101,7 +89,7 @@ const tags = [
   background: var(--ink);
   animation: blink 1.1s steps(1) infinite;
 }
-.hero__cursor--sm {
+.cursor--sm {
   width: 8px;
   height: 0.95em;
 }
@@ -121,6 +109,15 @@ const tags = [
   color: var(--ink-soft);
   font-size: clamp(1.05rem, 2vw, 1.3rem);
   margin-top: 0.9rem;
+}
+.hero__lead {
+  color: var(--muted);
+  font-size: 1rem;
+  max-width: 52ch;
+  margin-top: 0.9rem;
+}
+.hero__lead :deep(strong) {
+  color: var(--ink);
 }
 .hero__tags {
   display: flex;
@@ -205,6 +202,12 @@ const tags = [
   }
   .hero__visual {
     max-width: 560px;
+  }
+}
+@media (max-width: 480px) {
+  .term__body {
+    font-size: 0.72rem;
+    padding: 0.9rem 0.9rem 1.1rem;
   }
 }
 </style>

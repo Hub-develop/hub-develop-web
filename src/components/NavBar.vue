@@ -1,53 +1,66 @@
 <script setup lang="ts">
-import { onMounted, onUnmounted, ref } from 'vue'
+import { onMounted, onUnmounted, ref, watch } from 'vue'
+import { useRoute } from 'vue-router'
+import { site } from '@/content/site'
 
 const scrolled = ref(false)
-const active = ref('top')
+const open = ref(false)
+const route = useRoute()
 
-let io: IntersectionObserver | null = null
 const onScroll = () => {
   scrolled.value = window.scrollY > 8
 }
 
-onMounted(() => {
-  window.addEventListener('scroll', onScroll, { passive: true })
-  const ids = ['top', 'about', 'projects']
-  const sections = ids
-    .map((id) => document.getElementById(id))
-    .filter((el): el is HTMLElement => !!el)
-  io = new IntersectionObserver(
-    (entries) => {
-      const visible = entries
-        .filter((e) => e.isIntersecting)
-        .sort((a, b) => b.intersectionRatio - a.intersectionRatio)[0]
-      if (visible) active.value = visible.target.id
-    },
-    { rootMargin: '-45% 0px -50% 0px', threshold: [0, 0.25, 0.5, 1] },
-  )
-  sections.forEach((s) => io!.observe(s))
-})
+onMounted(() => window.addEventListener('scroll', onScroll, { passive: true }))
+onUnmounted(() => window.removeEventListener('scroll', onScroll))
 
-onUnmounted(() => {
-  window.removeEventListener('scroll', onScroll)
-  io?.disconnect()
-})
+// 路由变化时收起移动端菜单
+watch(
+  () => route.path,
+  () => (open.value = false),
+)
 </script>
 
 <template>
-  <header class="nav" :class="{ 'nav--scrolled': scrolled }">
+  <header class="nav" :class="{ 'nav--scrolled': scrolled, 'nav--open': open }">
     <div class="container nav__inner">
-      <a class="nav__brand" href="#top">
-        <span class="nav__logo">HD</span>
-        <span class="nav__name">Hub-develop</span>
-      </a>
-      <nav class="nav__links">
-        <a href="#about" :class="{ 'is-active': active === 'about' }">关于</a>
-        <a href="#projects" :class="{ 'is-active': active === 'projects' }">核心项目</a>
+      <RouterLink class="nav__brand" to="/" aria-label="返回首页">
+        <span class="nav__logo">{{ site.brand.short }}</span>
+        <span class="nav__name">{{ site.brand.name }}</span>
+      </RouterLink>
+
+      <nav class="nav__links" aria-label="主导航">
+        <RouterLink v-for="n in site.nav" :key="n.to" :to="n.to">{{ n.label }}</RouterLink>
       </nav>
-      <a class="btn btn--ghost nav__gh" href="https://github.com/Hub-develop" target="_blank" rel="noopener">
+
+      <a
+        class="btn btn--ghost nav__gh"
+        :href="site.brand.repo"
+        target="_blank"
+        rel="noopener"
+      >
         GitHub
       </a>
+
+      <button
+        class="nav__burger"
+        type="button"
+        :aria-expanded="open"
+        aria-label="切换菜单"
+        @click="open = !open"
+      >
+        <span></span><span></span><span></span>
+      </button>
     </div>
+
+    <Transition name="menu">
+      <nav v-show="open" class="nav__mobile" aria-label="移动端导航">
+        <div class="container">
+          <RouterLink v-for="n in site.nav" :key="n.to" :to="n.to">{{ n.label }}</RouterLink>
+          <a :href="site.brand.repo" target="_blank" rel="noopener">GitHub ↗</a>
+        </div>
+      </nav>
+    </Transition>
   </header>
 </template>
 
@@ -56,11 +69,12 @@ onUnmounted(() => {
   position: fixed;
   inset: 0 0 auto 0;
   z-index: 50;
-  transition: background 0.22s ease, border-color 0.22s ease, backdrop-filter 0.22s ease;
+  transition: background 0.22s ease, border-color 0.22s ease;
   border-bottom: 1px solid transparent;
 }
-.nav--scrolled {
-  background: rgba(255, 255, 255, 0.82);
+.nav--scrolled,
+.nav--open {
+  background: rgba(255, 255, 255, 0.85);
   backdrop-filter: saturate(180%) blur(14px);
   border-bottom-color: var(--line);
 }
@@ -68,7 +82,7 @@ onUnmounted(() => {
   display: flex;
   align-items: center;
   gap: 1.4rem;
-  height: 66px;
+  height: var(--nav-h);
 }
 .nav__brand {
   display: flex;
@@ -105,20 +119,74 @@ onUnmounted(() => {
 .nav__links a:hover {
   color: var(--ink);
 }
-.nav__links a.is-active {
+.nav__links a.router-link-active {
   background: var(--bg-soft);
   border: 1px solid var(--line);
   color: var(--ink);
-  padding: 0.4rem 0.85rem;
 }
 .nav__gh {
   margin-left: auto;
-  padding: 0.5rem 1rem;
-  font-size: 0.88rem;
 }
-@media (max-width: 620px) {
-  .nav__links {
+.nav__burger {
+  display: none;
+  flex-direction: column;
+  gap: 5px;
+  margin-left: auto;
+  padding: 8px;
+  background: transparent;
+  border: 0;
+  cursor: pointer;
+}
+.nav__burger span {
+  display: block;
+  width: 20px;
+  height: 2px;
+  border-radius: 2px;
+  background: var(--ink);
+  transition: transform 0.2s ease, opacity 0.2s ease;
+}
+.nav--open .nav__burger span:nth-child(1) {
+  transform: translateY(7px) rotate(45deg);
+}
+.nav--open .nav__burger span:nth-child(2) {
+  opacity: 0;
+}
+.nav--open .nav__burger span:nth-child(3) {
+  transform: translateY(-7px) rotate(-45deg);
+}
+.nav__mobile {
+  border-top: 1px solid var(--line);
+  padding: 0.6rem 0 1rem;
+}
+.nav__mobile .container {
+  display: flex;
+  flex-direction: column;
+}
+.nav__mobile a {
+  padding: 0.7rem 0.2rem;
+  font-weight: 650;
+  border-bottom: 1px solid var(--line);
+}
+.nav__mobile a.router-link-active {
+  color: var(--accent-ink);
+}
+.menu-enter-active,
+.menu-leave-active {
+  transition: opacity 0.2s ease, transform 0.2s ease;
+}
+.menu-enter-from,
+.menu-leave-to {
+  opacity: 0;
+  transform: translateY(-8px);
+}
+
+@media (max-width: 720px) {
+  .nav__links,
+  .nav__gh {
     display: none;
+  }
+  .nav__burger {
+    display: flex;
   }
 }
 </style>

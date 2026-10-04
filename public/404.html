@@ -1,0 +1,22 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Hub-develop</title>
+    <script>
+      /* GitHub Pages 对任意未匹配路径都会返回这个 404 页面。
+         我们把原始深链接存进 sessionStorage，再跳回仓库根，
+         由 index.html 读出来并 restore 成真实路径（SPA fallback）。 */
+      ;(function () {
+        var segmentsToKeep = 1 // /hub-develop-web/
+        var l = window.location
+        var base = l.pathname.split('/').slice(0, 1 + segmentsToKeep).join('/') + '/'
+        try {
+          sessionStorage.setItem('redirect', l.href)
+        } catch (e) {}
+        l.replace(l.origin + base)
+      })()
+    </script>
+  </head>
+  <body></body>
+</html>
