@@ -101,7 +101,6 @@ const nav: NavItem[] = [
 const socials: SocialItem[] = [
   { label: 'GitHub', href: brand.repo, mark: 'GH' },
   { label: '邮箱', href: `mailto:${brand.email}`, mark: '@' },
-  { label: 'CodeHub', href: brand.orgUrl, mark: 'CH' },
 ]
 
 /* ---------------------------------------------------------- */
