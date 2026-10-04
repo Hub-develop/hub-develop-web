@@ -5,7 +5,7 @@ import { renderRich } from '@/utils/rich'
 import { render } from '@/utils/template'
 import { buildVars } from '@/content/vars'
 
-const h = site.hero
+const h = computed(() => site.hero)
 /** 变量上下文（响应式：GitHub 数据运行时刷新后会自动更新） */
 const vars = computed(() => buildVars())
 /** 渲染文案里的 {{ 变量 | 过滤器 }} */

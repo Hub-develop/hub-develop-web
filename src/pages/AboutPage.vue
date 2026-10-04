@@ -1,8 +1,9 @@
 <script setup lang="ts">
+import { computed } from 'vue'
 import { site } from '@/content/site'
 import { t } from '@/i18n/ui'
 
-const about = site.about
+const about = computed(() => site.about)
 </script>
 
 <template>

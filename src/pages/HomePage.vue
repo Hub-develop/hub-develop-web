@@ -7,7 +7,7 @@ import { renderRich } from '@/utils/rich'
 import { useGithub } from '@/content/github'
 import { t } from '@/i18n/ui'
 
-const about = site.about
+const about = computed(() => site.about)
 
 /** GitHub 快照（响应式：运行时刷新后自动更新） */
 const { data: gh } = useGithub()

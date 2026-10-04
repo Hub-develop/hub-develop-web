@@ -1,8 +1,9 @@
 <script setup lang="ts">
+import { computed } from 'vue'
 import { site } from '@/content/site'
 
 const year = new Date().getFullYear()
-const f = site.footer
+const f = computed(() => site.footer)
 </script>
 
 <template>

@@ -1,9 +1,9 @@
 <script setup lang="ts">
-import { ref } from 'vue'
+import { computed, ref } from 'vue'
 import { site } from '@/content/site'
 import { t } from '@/i18n/ui'
 
-const c = site.contact
+const c = computed(() => site.contact)
 const copied = ref<string | null>(null)
 
 async function copy(text: string) {
