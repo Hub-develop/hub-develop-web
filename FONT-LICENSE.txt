@@ -1,0 +1,14 @@
+阿里妈妈方圆体 VF / Alimama FangYuanTi VF
+=========================================
+
+字体名称：阿里妈妈方圆体 VF（Alimama FangYuanTi VF）
+字体作者：阿里妈妈 · 智造字（阿里巴巴设计）
+版权信息：Copyright (c) 2023 阿里巴巴(中国)有限公司，版权所有
+
+授权范围：
+- 个人、企业均可基于合法目的免费用于商业用途或非商业用途。
+- 支持网页（Web Font）、App 内嵌等嵌入使用。
+- 免费商用，无需付费，亦无需作者书面授权（但保留字体版权归阿里巴巴所有）。
+
+本项目以 Web Font（woff2 可变字体）形式自托管使用，未做修改。
+原始来源：阿里巴巴字体平台 https://www.alibabafonts.com/  /  @fontpkg/alimama-fang-yuan-ti-vf
