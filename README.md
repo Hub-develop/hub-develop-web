@@ -2,7 +2,7 @@
 
 Hub-develop 是 **CodeHub 的上游开源组织**的官方站点，使用 **Vue 3 + Vite + TypeScript + vue-router** 构建。
 
-> 在线地址：https://Hub-develop.github.io/hub-develop-web/
+> 在线地址：https://hub-develop.top/
 
 ## 特点
 
@@ -16,7 +16,7 @@ Hub-develop 是 **CodeHub 的上游开源组织**的官方站点，使用 **Vue 
 
 ```bash
 npm install
-npm run dev        # 本地开发 http://localhost:5173/hub-develop-web/
+npm run dev        # 本地开发 http://localhost:5173/
 npm run build      # 构建到 dist/
 npm run preview    # 预览构建产物
 npm run type-check # vue-tsc 类型检查
@@ -50,8 +50,9 @@ src/
 
 站点通过 `gh-pages` 分支 + GitHub Pages 发布（不使用 Actions）：
 
-- `vite.config.ts` 中 `base = '/hub-develop-web/'`，保证子路径资源正确。
-- 构建产物 `dist/` 推送到 `gh-pages` 分支，Pages 源设为该分支 `/root`。
+- `vite.config.ts` 中 `base = '/'`，配合自定义域名 `hub-develop.top`（GitHub Pages 挂在根路径）。
+- 构建产物 `dist/` 推送到 `gh-pages` 分支，Pages 源设为该分支 `/root`，自定义域名 `hub-develop.top` 在仓库 Pages 设置中绑定。
+- `public/CNAME` 声明自定义域名，重新发布时不会被覆盖。
 - `public/404.html` 负责 SPA 深链接回退：直接访问 `/projects/mchub` 也能正常打开。
 
 更新流程：改内容 → `npm run build` → 把 `dist/` 推到 `gh-pages`。

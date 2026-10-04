@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import type { Project } from '@/content/site'
 import { statusMeta } from '@/content/projects'
+import { relativeTime } from '@/utils/format'
 
 defineProps<{ project: Project }>()
 </script>
@@ -22,6 +23,12 @@ defineProps<{ project: Project }>()
     <ul class="pcard__stack">
       <li v-for="s in project.stack" :key="s" class="tag">{{ s }}</li>
     </ul>
+
+    <p class="pcard__meta">
+      <span v-if="project.github.language" class="pcard__lang">{{ project.github.language }}</span>
+      <span v-if="project.github.stars > 0">★ {{ project.github.stars }}</span>
+      <span class="pcard__upd">更新于 {{ relativeTime(project.github.pushedAt) }}</span>
+    </p>
 
     <div class="pcard__foot">
       <RouterLink class="link-arrow" :to="`/projects/${project.slug}`">查看详情</RouterLink>
@@ -75,6 +82,23 @@ defineProps<{ project: Project }>()
   flex-wrap: wrap;
   gap: 0.4rem;
   margin-bottom: 1.2rem;
+}
+.pcard__meta {
+  display: flex;
+  align-items: center;
+  gap: 0.7rem;
+  flex-wrap: wrap;
+  font-family: var(--mono);
+  font-size: 0.76rem;
+  color: var(--muted);
+  margin-bottom: 0.9rem;
+}
+.pcard__lang {
+  color: var(--accent-ink);
+  font-weight: 600;
+}
+.pcard__upd {
+  margin-left: auto;
 }
 .pcard__foot {
   display: flex;

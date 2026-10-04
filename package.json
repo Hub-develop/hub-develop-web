@@ -6,6 +6,8 @@
   "description": "Hub-develop 组织官网首页 · Vue 3 + Vite + TypeScript",
   "scripts": {
     "dev": "vite",
+    "sync": "node scripts/sync-github.mjs",
+    "prebuild": "node scripts/sync-github.mjs",
     "build": "vite build",
     "preview": "vite preview",
     "type-check": "vue-tsc --noEmit"

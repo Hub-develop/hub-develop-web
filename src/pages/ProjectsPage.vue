@@ -2,23 +2,29 @@
 import { computed, ref } from 'vue'
 import ProjectCard from '@/components/ProjectCard.vue'
 import { site, projects } from '@/content/site'
-import { statusMeta } from '@/content/projects'
-import type { ProjectStatus } from '@/content/projects'
 
-type Filter = 'all' | ProjectStatus
-
+/** 按「主语言」筛选（语言来自 GitHub，非写死） */
+type Filter = string
 const filter = ref<Filter>('all')
 
-const filters: { key: Filter; label: string }[] = [
-  { key: 'all', label: '全部' },
-  { key: 'active', label: statusMeta.active.label },
-  { key: 'maintained', label: statusMeta.maintained.label },
-  { key: 'beta', label: statusMeta.beta.label },
-]
+const languages = computed(() => {
+  const set = new Set<string>()
+  for (const p of projects) if (p.github.language) set.add(p.github.language)
+  return [...set].sort()
+})
+const hasOther = computed(() => projects.some((p) => !p.github.language))
 
-const list = computed(() =>
-  filter.value === 'all' ? projects : projects.filter((p) => p.status === filter.value),
-)
+const filters = computed(() => [
+  { key: 'all', label: '全部' },
+  ...languages.value.map((l) => ({ key: l, label: l })),
+  ...(hasOther.value ? [{ key: '__other__', label: '其他' }] : []),
+])
+
+const list = computed(() => {
+  if (filter.value === 'all') return projects
+  if (filter.value === '__other__') return projects.filter((p) => !p.github.language)
+  return projects.filter((p) => p.github.language === filter.value)
+})
 </script>
 
 <template>
@@ -33,7 +39,7 @@ const list = computed(() =>
       </header>
 
       <div class="toolbar" v-reveal>
-        <div class="chips" role="tablist" aria-label="按状态筛选">
+        <div class="chips" role="tablist" aria-label="按主语言筛选">
           <button
             v-for="f in filters"
             :key="f.key"
@@ -54,7 +60,7 @@ const list = computed(() =>
         <ProjectCard v-for="p in list" :key="p.slug" :project="p" />
       </TransitionGroup>
 
-      <p v-if="!list.length" class="empty">这个状态下暂时没有项目。</p>
+      <p v-if="!list.length" class="empty">这个分类下暂时没有项目。</p>
 
       <div class="tail" v-reveal>
         <div>

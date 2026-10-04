@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { computed } from 'vue'
 import { getProject, getProjectNeighbors, statusMeta } from '@/content/projects'
+import { relativeTime, humanSize } from '@/utils/format'
 
 const props = defineProps<{ slug: string }>()
 
@@ -81,6 +82,33 @@ const neighbors = computed(() => getProjectNeighbors(props.slug))
               <span class="meta__k">技术栈</span>
               <ul class="meta__stack">
                 <li v-for="s in project.stack" :key="s" class="tag">{{ s }}</li>
+              </ul>
+
+              <div class="meta__sep"></div>
+
+              <span class="meta__k">GitHub 数据</span>
+              <ul class="meta__gh">
+                <li>
+                  <span>语言</span><span>{{ project.github.language || '—' }}</span>
+                </li>
+                <li>
+                  <span>Star</span><span>{{ project.github.stars }}</span>
+                </li>
+                <li>
+                  <span>Fork</span><span>{{ project.github.forks }}</span>
+                </li>
+                <li>
+                  <span>Issues</span><span>{{ project.github.openIssues }}</span>
+                </li>
+                <li>
+                  <span>体积</span><span>{{ humanSize(project.github.size) }}</span>
+                </li>
+                <li>
+                  <span>许可证</span><span>{{ project.github.license || '—' }}</span>
+                </li>
+                <li>
+                  <span>最近更新</span><span>{{ relativeTime(project.github.pushedAt) }}</span>
+                </li>
               </ul>
 
               <div class="meta__sep"></div>
@@ -255,6 +283,25 @@ const neighbors = computed(() => getProjectNeighbors(props.slug))
   display: flex;
   flex-wrap: wrap;
   gap: 0.4rem;
+}
+.meta__gh {
+  display: grid;
+  gap: 0.42rem;
+}
+.meta__gh li {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  font-size: 0.85rem;
+}
+.meta__gh li span:first-child {
+  color: var(--muted);
+}
+.meta__gh li span:last-child {
+  font-family: var(--mono);
+  font-weight: 600;
+  color: var(--ink);
 }
 .meta__links {
   display: grid;

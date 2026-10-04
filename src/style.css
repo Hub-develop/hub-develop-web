@@ -4,7 +4,7 @@
  * ============================================================ */
 
 /* 阿里妈妈方圆体 VF —— 阿里巴巴免费可商用双轴可变中文字体（字重 200–700）
- * 自托管 woff2，路径由 Vite 按 base(/hub-develop-web/) 自动改写，dev/prod 均可用 */
+ * 自托管 woff2，路径由 Vite 按 base(/) 自动改写，dev/prod 均可用 */
 @font-face {
   font-family: "Alimama FangYuanTi VF";
   src: url("./assets/fonts/AlimamaFangYuanTiVF.woff2") format("woff2-variations");
@@ -25,10 +25,10 @@
   --bg: #ffffff;
   --bg-soft: #f7f8fa;
 
-  /* 强调色 */
-  --accent: #6366f1;
-  --accent-ink: #4f46e5;
-  --accent-soft: rgba(99, 102, 241, 0.1);
+  /* 强调色（薄荷绿，取自组织图标） */
+  --accent: #6feec2;
+  --accent-ink: #0a7d5a;
+  --accent-soft: rgba(111, 238, 194, 0.18);
   --emerald-soft: rgba(16, 185, 129, 0.12);
   --emerald-ink: #059669;
   --amber-soft: rgba(245, 158, 11, 0.14);

@@ -1,0 +1,454 @@
+{
+  "syncedAt": "2026-10-04T13:16:36.848Z",
+  "tokenSource": "gh auth token",
+  "orgs": [
+    {
+      "login": "Hub-develop",
+      "name": "Hub",
+      "label": "Hub",
+      "display": "Hub-develop",
+      "role": "main",
+      "note": "组织主站与品牌",
+      "description": "",
+      "blog": "",
+      "location": "",
+      "avatar": "https://avatars.githubusercontent.com/u/334967912?v=4",
+      "url": "https://github.com/Hub-develop",
+      "publicRepos": 1,
+      "followers": 0
+    },
+    {
+      "login": "Hub-code-develop",
+      "name": "Hub.code",
+      "label": "Hub.code",
+      "display": "Hub-code-develop",
+      "role": "projects",
+      "note": "代码 / 运行时 / UI 组件",
+      "description": "",
+      "blog": "",
+      "location": "",
+      "avatar": "https://avatars.githubusercontent.com/u/330414789?v=4",
+      "url": "https://github.com/Hub-code-develop",
+      "publicRepos": 7,
+      "followers": 0
+    },
+    {
+      "login": "Hub-ai-develop",
+      "name": "Hub.ai",
+      "label": "Hub.ai",
+      "display": "Hub-ai-develop",
+      "role": "projects",
+      "note": "AI 方向",
+      "description": "",
+      "blog": "",
+      "location": "",
+      "avatar": "https://avatars.githubusercontent.com/u/334956658?v=4",
+      "url": "https://github.com/Hub-ai-develop",
+      "publicRepos": 0,
+      "followers": 0
+    }
+  ],
+  "repos": [
+    {
+      "owner": "Hub-code-develop",
+      "orgLabel": "Hub.code",
+      "name": "MChub",
+      "fullName": "Hub-code-develop/MChub",
+      "url": "https://github.com/Hub-code-develop/MChub",
+      "homepage": "",
+      "description": "一个GameHub的MC启动器组件.",
+      "language": "C#",
+      "topics": [],
+      "stars": 0,
+      "forks": 0,
+      "openIssues": 0,
+      "size": 43101,
+      "archived": false,
+      "license": "AGPL-3.0",
+      "defaultBranch": "main",
+      "createdAt": "2026-09-18T23:32:54Z",
+      "pushedAt": "2026-10-04T01:30:07Z",
+      "languages": {
+        "C#": 0.9833,
+        "Vue": 0.0038,
+        "Inno Setup": 0.0031,
+        "Shell": 0.0024,
+        "JavaScript": 0.0022,
+        "HTML": 0.0021,
+        "C++": 0.0013,
+        "PowerShell": 0.0006,
+        "CSS": 0.0005,
+        "F#": 0.0003,
+        "C": 0.0002,
+        "Batchfile": 0.0002
+      }
+    },
+    {
+      "owner": "Hub-code-develop",
+      "orgLabel": "Hub.code",
+      "name": "CodeNet",
+      "fullName": "Hub-code-develop/CodeNet",
+      "url": "https://github.com/Hub-code-develop/CodeNet",
+      "homepage": "",
+      "description": "",
+      "language": "C#",
+      "topics": [],
+      "stars": 0,
+      "forks": 0,
+      "openIssues": 5,
+      "size": 101226,
+      "archived": false,
+      "license": "MIT",
+      "defaultBranch": "main",
+      "createdAt": "2026-09-28T23:06:58Z",
+      "pushedAt": "2026-10-03T02:41:29Z",
+      "languages": {
+        "C#": 0.5284,
+        "IL Assembly": 0.3448,
+        "C++": 0.0651,
+        "C": 0.0491,
+        "Visual Basic .NET": 0.0027,
+        "Assembly": 0.0022,
+        "TypeScript": 0.0013,
+        "Python": 0.0012,
+        "Shell": 0.001,
+        "CMake": 0.0009,
+        "Roff": 0.0009,
+        "XSLT": 0.0006,
+        "PowerShell": 0.0003,
+        "Swift": 0.0003,
+        "Yacc": 0.0002,
+        "Batchfile": 0.0002,
+        "Gnuplot": 0.0002,
+        "Objective-C": 0.0002,
+        "JavaScript": 0.0001,
+        "F#": 0.0001,
+        "HTML": 0.0001,
+        "Makefile": 0,
+        "Perl": 0,
+        "Dockerfile": 0,
+        "Java": 0,
+        "Vue": 0,
+        "CSS": 0,
+        "DTrace": 0,
+        "BitBake": 0,
+        "Pawn": 0,
+        "PHP": 0,
+        "ASP.NET": 0,
+        "Objective-C++": 0
+      }
+    },
+    {
+      "owner": "Hub-code-develop",
+      "orgLabel": "Hub.code",
+      "name": "MCBEforMacOS-CodeHub",
+      "fullName": "Hub-code-develop/MCBEforMacOS-CodeHub",
+      "url": "https://github.com/Hub-code-develop/MCBEforMacOS-CodeHub",
+      "homepage": "",
+      "description": "macOS 上运行《我的世界》基岩版(Windows GDK 版)的自包含运行时:Wine(WineGDK)、xodus-service、MoltenVK/DXVK/vkd3d-proton",
+      "language": "Shell",
+      "topics": [],
+      "stars": 0,
+      "forks": 0,
+      "openIssues": 0,
+      "size": 19,
+      "archived": false,
+      "license": "",
+      "defaultBranch": "main",
+      "createdAt": "2026-10-01T11:46:35Z",
+      "pushedAt": "2026-10-01T13:29:13Z",
+      "languages": {
+        "Shell": 0.5323,
+        "C#": 0.4677
+      }
+    },
+    {
+      "owner": "Hub-code-develop",
+      "orgLabel": "Hub.code",
+      "name": "CodeHub-OreUI",
+      "fullName": "Hub-code-develop/CodeHub-OreUI",
+      "url": "https://github.com/Hub-code-develop/CodeHub-OreUI",
+      "homepage": "",
+      "description": "Minecraft Bedrock (OreUI) style controls for Avalonia 12",
+      "language": "Python",
+      "topics": [],
+      "stars": 0,
+      "forks": 0,
+      "openIssues": 0,
+      "size": 321,
+      "archived": false,
+      "license": "",
+      "defaultBranch": "main",
+      "createdAt": "2026-09-26T02:41:44Z",
+      "pushedAt": "2026-09-29T12:43:42Z",
+      "languages": {
+        "Python": 0.8243,
+        "C#": 0.1757
+      }
+    },
+    {
+      "owner": "Hub-code-develop",
+      "orgLabel": "Hub.code",
+      "name": "WebHub",
+      "fullName": "Hub-code-develop/WebHub",
+      "url": "https://github.com/Hub-code-develop/WebHub",
+      "homepage": "",
+      "description": "Website and Network Security.",
+      "language": "",
+      "topics": [],
+      "stars": 0,
+      "forks": 0,
+      "openIssues": 0,
+      "size": 0,
+      "archived": false,
+      "license": "",
+      "defaultBranch": "main",
+      "createdAt": "2026-09-29T11:05:50Z",
+      "pushedAt": "2026-09-29T11:05:51Z",
+      "languages": {}
+    },
+    {
+      "owner": "Hub-code-develop",
+      "orgLabel": "Hub.code",
+      "name": "CodeHub-FluentUI",
+      "fullName": "Hub-code-develop/CodeHub-FluentUI",
+      "url": "https://github.com/Hub-code-develop/CodeHub-FluentUI",
+      "homepage": "",
+      "description": "Control library focused on fluent design and bringing more WinUI controls into Avalonia",
+      "language": "C#",
+      "topics": [],
+      "stars": 0,
+      "forks": 0,
+      "openIssues": 0,
+      "size": 75654,
+      "archived": false,
+      "license": "MIT",
+      "defaultBranch": "master",
+      "createdAt": "2026-09-20T11:42:54Z",
+      "pushedAt": "2026-09-22T10:48:30Z",
+      "languages": {
+        "C#": 1
+      }
+    }
+  ],
+  "stacks": [
+    {
+      "name": "C#",
+      "repos": 5,
+      "weight": 3.1551
+    },
+    {
+      "name": "Python",
+      "repos": 2,
+      "weight": 0.8255
+    },
+    {
+      "name": "Shell",
+      "repos": 3,
+      "weight": 0.5357
+    },
+    {
+      "name": "IL Assembly",
+      "repos": 1,
+      "weight": 0.3448
+    },
+    {
+      "name": "C++",
+      "repos": 2,
+      "weight": 0.0664
+    },
+    {
+      "name": "C",
+      "repos": 2,
+      "weight": 0.0493
+    },
+    {
+      "name": "Vue",
+      "repos": 2,
+      "weight": 0.0038
+    },
+    {
+      "name": "Inno Setup",
+      "repos": 1,
+      "weight": 0.0031
+    },
+    {
+      "name": "Visual Basic .NET",
+      "repos": 1,
+      "weight": 0.0027
+    },
+    {
+      "name": "JavaScript",
+      "repos": 2,
+      "weight": 0.0023
+    },
+    {
+      "name": "HTML",
+      "repos": 2,
+      "weight": 0.0022
+    },
+    {
+      "name": "Assembly",
+      "repos": 1,
+      "weight": 0.0022
+    },
+    {
+      "name": "TypeScript",
+      "repos": 1,
+      "weight": 0.0013
+    },
+    {
+      "name": "PowerShell",
+      "repos": 2,
+      "weight": 0.0009
+    },
+    {
+      "name": "CMake",
+      "repos": 1,
+      "weight": 0.0009
+    },
+    {
+      "name": "Roff",
+      "repos": 1,
+      "weight": 0.0009
+    },
+    {
+      "name": "XSLT",
+      "repos": 1,
+      "weight": 0.0006
+    },
+    {
+      "name": "CSS",
+      "repos": 2,
+      "weight": 0.0005
+    },
+    {
+      "name": "F#",
+      "repos": 2,
+      "weight": 0.0004
+    },
+    {
+      "name": "Batchfile",
+      "repos": 2,
+      "weight": 0.0004
+    },
+    {
+      "name": "Swift",
+      "repos": 1,
+      "weight": 0.0003
+    },
+    {
+      "name": "Yacc",
+      "repos": 1,
+      "weight": 0.0002
+    },
+    {
+      "name": "Gnuplot",
+      "repos": 1,
+      "weight": 0.0002
+    },
+    {
+      "name": "Objective-C",
+      "repos": 1,
+      "weight": 0.0002
+    },
+    {
+      "name": "Makefile",
+      "repos": 1,
+      "weight": 0
+    },
+    {
+      "name": "Perl",
+      "repos": 1,
+      "weight": 0
+    },
+    {
+      "name": "Dockerfile",
+      "repos": 1,
+      "weight": 0
+    },
+    {
+      "name": "Java",
+      "repos": 1,
+      "weight": 0
+    },
+    {
+      "name": "DTrace",
+      "repos": 1,
+      "weight": 0
+    },
+    {
+      "name": "BitBake",
+      "repos": 1,
+      "weight": 0
+    },
+    {
+      "name": "Pawn",
+      "repos": 1,
+      "weight": 0
+    },
+    {
+      "name": "PHP",
+      "repos": 1,
+      "weight": 0
+    },
+    {
+      "name": "ASP.NET",
+      "repos": 1,
+      "weight": 0
+    },
+    {
+      "name": "Objective-C++",
+      "repos": 1,
+      "weight": 0
+    }
+  ],
+  "tags": [
+    {
+      "name": "Hub",
+      "count": 2
+    },
+    {
+      "name": "Hub.ai",
+      "count": 2
+    },
+    {
+      "name": "Hub.code",
+      "count": 2
+    },
+    {
+      "name": "C",
+      "count": 1
+    },
+    {
+      "name": "C#",
+      "count": 1
+    },
+    {
+      "name": "C++",
+      "count": 1
+    },
+    {
+      "name": "IL Assembly",
+      "count": 1
+    },
+    {
+      "name": "Python",
+      "count": 1
+    },
+    {
+      "name": "Shell",
+      "count": 1
+    }
+  ],
+  "totals": {
+    "repos": 6,
+    "stars": 0,
+    "forks": 0,
+    "openIssues": 5,
+    "stacks": 34,
+    "tags": 9,
+    "orgs": 3,
+    "size": 220321
+  }
+}

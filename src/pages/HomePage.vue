@@ -1,10 +1,19 @@
 <script setup lang="ts">
+import { computed } from 'vue'
 import Hero from '@/components/Hero.vue'
 import ProjectCard from '@/components/ProjectCard.vue'
 import { site, featuredProjects } from '@/content/site'
 import { renderRich } from '@/utils/rich'
+import { useGithub } from '@/content/github'
 
 const about = site.about
+
+/** GitHub 快照（响应式：运行时刷新后自动更新） */
+const { data: gh } = useGithub()
+const stacks = computed(() => gh.value.stacks.slice(0, 12))
+const tags = computed(() => gh.value.tags)
+const maxWeight = computed(() => Math.max(...stacks.value.map((s) => s.weight), 0.0001))
+const pct = (w: number) => `${Math.max(4, Math.round((w / maxWeight.value) * 100))}%`
 </script>
 
 <template>
@@ -28,8 +37,40 @@ const about = site.about
       </div>
     </section>
 
-    <!-- 关于预览 -->
+    <!-- 技术栈 & 标签（实时来自 GitHub，非写死） -->
     <section class="section section--soft">
+      <div class="container">
+        <div class="section-head" v-reveal>
+          <p class="section-kicker">// stack</p>
+          <h2 class="section-title">技术栈与标签</h2>
+          <p class="lead">
+            由 <strong>{{ gh.totals.repos }}</strong> 个公开仓库的语言分布实时聚合而来，覆盖
+            <strong>{{ gh.totals.stacks }}</strong> 项技术栈、<strong>{{ gh.totals.tags }}</strong>
+            个组织标签。
+          </p>
+        </div>
+
+        <ul class="stacks" v-reveal>
+          <li v-for="s in stacks" :key="s.name" class="stack">
+            <span class="stack__name">{{ s.name }}</span>
+            <span class="stack__track">
+              <span class="stack__bar" :style="{ width: pct(s.weight) }"></span>
+            </span>
+            <span class="stack__n">{{ s.repos }} 仓库</span>
+          </li>
+        </ul>
+
+        <div class="taghead" v-reveal>
+          <span class="taghead__k">组织标签</span>
+          <ul class="orgtags">
+            <li v-for="t in tags" :key="t.name" class="orgtag">{{ t.name }}</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- 关于预览 -->
+    <section class="section">
       <div class="container">
         <div class="section-head" v-reveal>
           <p class="section-kicker">// about</p>
@@ -91,6 +132,78 @@ const about = site.about
   margin-top: 2.6rem;
 }
 
+/* ---------- 技术栈 ---------- */
+.stacks {
+  display: grid;
+  gap: 0.55rem;
+  margin-top: 2.4rem;
+}
+.stack {
+  display: grid;
+  grid-template-columns: 14ch minmax(0, 1fr) auto;
+  align-items: center;
+  gap: 1rem;
+}
+.stack__name {
+  font-family: var(--mono);
+  font-size: 0.86rem;
+  color: var(--ink-soft);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.stack__track {
+  height: 9px;
+  border-radius: 999px;
+  background: #fff;
+  border: 1px solid var(--line);
+  overflow: hidden;
+}
+.stack__bar {
+  display: block;
+  height: 100%;
+  border-radius: 999px;
+  background: linear-gradient(90deg, var(--accent), #34d399);
+  transition: width 0.6s cubic-bezier(0.22, 1, 0.36, 1);
+}
+.stack__n {
+  font-family: var(--mono);
+  font-size: 0.76rem;
+  color: var(--muted);
+  white-space: nowrap;
+}
+
+.taghead {
+  display: flex;
+  align-items: center;
+  gap: 0.9rem;
+  flex-wrap: wrap;
+  margin-top: 2.2rem;
+  padding-top: 1.8rem;
+  border-top: 1px solid var(--line);
+}
+.taghead__k {
+  font-family: var(--mono);
+  font-size: 0.76rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+.orgtags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+.orgtag {
+  font-family: var(--mono);
+  font-size: 0.8rem;
+  padding: 0.34rem 0.8rem;
+  border-radius: 999px;
+  background: var(--accent-soft);
+  color: var(--accent-ink);
+  border: 1px solid rgba(111, 238, 194, 0.45);
+}
+
 .caps {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
@@ -144,6 +257,10 @@ const about = site.about
 }
 
 @media (max-width: 640px) {
+  .stack {
+    grid-template-columns: 9ch minmax(0, 1fr) auto;
+    gap: 0.6rem;
+  }
   .cta {
     padding: 1.8rem 1.4rem;
   }

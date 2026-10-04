@@ -18,7 +18,8 @@ const f = site.footer
       </p>
 
       <RouterLink class="foot__mark" to="/" :aria-label="f.wordmark">
-        {{ f.wordmark }}
+        <img class="foot__logo" src="/logo.png" alt="" width="52" height="52" />
+        <span class="foot__word">{{ f.wordmark }}</span>
       </RouterLink>
 
       <div class="foot__row">
@@ -60,20 +61,20 @@ const f = site.footer
   mask-image: radial-gradient(ellipse 105% 95% at 50% 105%, #000 28%, transparent 76%);
 }
 
-/* 底部极光 */
+/* 底部极光（薄荷绿，呼应组织图标） */
 .foot__glow {
   position: absolute;
   inset: auto 0 -34% 0;
   height: 78%;
   z-index: -1;
-  background: radial-gradient(closest-side, rgba(99, 102, 241, 0.55), transparent 70%) 28% 82% /
+  background: radial-gradient(closest-side, rgba(111, 238, 194, 0.5), transparent 70%) 28% 82% /
       52% 92% no-repeat,
-    radial-gradient(closest-side, rgba(168, 85, 247, 0.42), transparent 70%) 58% 92% / 56% 82%
+    radial-gradient(closest-side, rgba(45, 212, 191, 0.4), transparent 70%) 58% 92% / 56% 82%
       no-repeat,
-    radial-gradient(closest-side, rgba(56, 189, 248, 0.34), transparent 70%) 82% 68% / 46% 72%
+    radial-gradient(closest-side, rgba(59, 130, 246, 0.26), transparent 70%) 82% 68% / 46% 72%
       no-repeat;
   filter: blur(28px);
-  opacity: 0.8;
+  opacity: 0.85;
   animation: drift 18s ease-in-out infinite alternate;
 }
 @keyframes drift {
@@ -94,7 +95,7 @@ const f = site.footer
   margin-bottom: 0.4rem;
 }
 .foot__prompt .prompt__user {
-  color: #a5b4fc;
+  color: #7fe7c4;
 }
 .foot__prompt .prompt__path {
   color: var(--dark-ink);
@@ -114,23 +115,37 @@ const f = site.footer
   }
 }
 
-/* 超大白色字标 */
+/* 超大白色字标 + 组织图标 */
 .foot__mark {
-  display: block;
-  font-size: clamp(3rem, 13vw, 10rem);
-  font-weight: 850;
-  letter-spacing: -0.045em;
-  line-height: 0.95;
+  display: flex;
+  align-items: center;
+  gap: clamp(0.8rem, 2.4vw, 1.6rem);
   margin: 1.2rem 0 2.4rem;
-  background: linear-gradient(180deg, #ffffff 28%, #737a95 130%);
-  -webkit-background-clip: text;
-  background-clip: text;
-  color: transparent;
   transition: opacity 0.25s ease;
   width: fit-content;
 }
 .foot__mark:hover {
   opacity: 0.85;
+}
+.foot__logo {
+  width: clamp(2.6rem, 6vw, 4rem);
+  height: clamp(2.6rem, 6vw, 4rem);
+  padding: 0.42rem;
+  border-radius: 22%;
+  background: rgba(255, 255, 255, 0.07);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  object-fit: contain;
+  flex: none;
+}
+.foot__word {
+  font-size: clamp(2.4rem, 11vw, 8rem);
+  font-weight: 850;
+  letter-spacing: -0.045em;
+  line-height: 0.95;
+  background: linear-gradient(180deg, #ffffff 28%, #737a95 130%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
 }
 
 .foot__row {

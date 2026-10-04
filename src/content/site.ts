@@ -14,6 +14,7 @@
  * ============================================================ */
 
 import { projects, featuredProjects } from './projects'
+import { githubData } from './github'
 
 export interface NavItem {
   label: string
@@ -53,6 +54,22 @@ export interface ContactChannel {
   mark: string
 }
 
+/** 终端窗口里的一行 —— 完全可自定义，文本支持 {{ 变量 | 过滤器 }} 模板 */
+export interface TerminalLine {
+  /** cmd 命令行 / kv 键值 / out 输出 / text 纯文本 / blank 空行 */
+  type: 'cmd' | 'kv' | 'out' | 'text' | 'blank'
+  /** cmd / out / text 的文本 */
+  text?: string
+  /** kv 的键 */
+  key?: string
+  /** kv 的值 */
+  value?: string
+  /** 颜色：val 蓝 / num 橙 / ok 绿 / key 灰 */
+  tone?: 'val' | 'num' | 'ok' | 'key'
+  /** 行尾是否显示闪烁光标 */
+  cursor?: boolean
+}
+
 /* ---------------------------------------------------------- */
 /*  品牌                                                       */
 /* ---------------------------------------------------------- */
@@ -67,6 +84,9 @@ const brand = {
   domain: 'hub-develop.top',
   /** 组织 GitHub 地址 */
   repo: 'https://github.com/Hub-develop',
+  /** 下游 / 产品化组织（Hub-develop 的上游能力在此发布） */
+  org: 'CodeHub',
+  orgUrl: 'https://github.com/CodeHub-develop',
   /** 联系邮箱 */
   email: '',
 }
@@ -107,17 +127,27 @@ const hero = {
   ],
   primaryCta: { label: '浏览核心项目', to: '/projects' },
   secondaryCta: { label: '了解我们', to: '/about' },
-  /** Hero 右侧的模拟终端窗口 */
+  /**
+   * Hero 右侧的模拟终端窗口 —— 输出完全自定义。
+   * 每一行的文本都支持模板变量，改这里就能快速换内容，无需动组件：
+   *   {{ site.brand.name }} · {{ totals.repos }} ·
+   *   {{ stacks.top | take:"4, · " }} · {{ tags.top | take:"6, " }} …
+   * 行类型：cmd(命令行) / kv(键值) / out(输出) / text(纯文本) / blank(空行)。
+   */
   terminal: {
     title: 'hub-develop — zsh',
-    cmd: '$ hub-develop --about',
-    rows: [
-      { key: 'org', value: brand.name, kind: 'val' as const },
-      { key: 'upstream', value: brand.org, kind: 'val' as const },
-      { key: 'focus', value: 'cross-platform · server · docs · os', kind: 'val' as const },
-      { key: 'projects', value: `${projects.length} public`, kind: 'num' as const },
-      { key: 'status', value: '● building', kind: 'ok' as const },
-    ],
+    lines: [
+      { type: 'cmd', text: '$ hub-develop --about' },
+      { type: 'kv', key: 'org', value: '{{ site.brand.name }}' },
+      { type: 'kv', key: 'upstream', value: '{{ site.brand.org | default:"—" }}' },
+      { type: 'kv', key: 'repos', value: '{{ totals.repos }} public' },
+      { type: 'kv', key: 'stacks', value: '{{ stacks.top | take:"4, · " }}' },
+      { type: 'kv', key: 'topics', value: '{{ tags.top | take:"6, " }}' },
+      { type: 'kv', key: 'stars', value: '{{ totals.stars | k }}' },
+      { type: 'kv', key: 'status', value: '● building', tone: 'ok' },
+      { type: 'blank' },
+      { type: 'cmd', text: '$ ', cursor: true },
+    ] as TerminalLine[],
   },
 }
 
@@ -184,11 +214,11 @@ const about = {
       desc: '不做一次性项目。维护、迭代与打磨，和「做出来」同样重要。',
     },
   ] as Principle[],
-  /** 关于页的统计（数据来自真实配置，非手填） */
+  /** 关于页的统计（来自 GitHub 同步快照，非手填） */
   stats: [
-    { value: String(projects.length), label: '核心项目' },
+    { value: String(githubData.totals.repos), label: '开源仓库' },
     { value: '04', label: '专注方向' },
-    { value: String(socials.length), label: '联系渠道' },
+    { value: String(githubData.totals.orgs), label: '关联组织' },
   ] as StatItem[],
 }
 

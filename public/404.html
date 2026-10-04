@@ -8,7 +8,7 @@
          我们把原始深链接存进 sessionStorage，再跳回仓库根，
          由 index.html 读出来并 restore 成真实路径（SPA fallback）。 */
       ;(function () {
-        var segmentsToKeep = 1 // /hub-develop-web/
+        var segmentsToKeep = 0 // 自定义域名挂在根路径 /
         var l = window.location
         var base = l.pathname.split('/').slice(0, 1 + segmentsToKeep).join('/') + '/'
         try {

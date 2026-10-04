@@ -1,0 +1,32 @@
+{
+  "_note": "GitHub 数据源配置 —— scripts/sync-github.mjs（构建期同步）与前端共用。要调整聚合范围只改这里。",
+  "orgs": [
+    {
+      "owner": "Hub-develop",
+      "label": "Hub",
+      "display": "Hub-develop",
+      "role": "main",
+      "note": "组织主站与品牌"
+    },
+    {
+      "owner": "Hub-code-develop",
+      "label": "Hub.code",
+      "display": "Hub-code-develop",
+      "role": "projects",
+      "note": "代码 / 运行时 / UI 组件"
+    },
+    {
+      "owner": "Hub-ai-develop",
+      "label": "Hub.ai",
+      "display": "Hub-ai-develop",
+      "role": "projects",
+      "note": "AI 方向"
+    }
+  ],
+  "exclude": [".github", "hub-develop-web"],
+  "excludeForks": true,
+  "runtimeRefresh": {
+    "enabled": true,
+    "ttlMinutes": 60
+  }
+}

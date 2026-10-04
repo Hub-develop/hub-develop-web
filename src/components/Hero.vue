@@ -1,8 +1,17 @@
 <script setup lang="ts">
+import { computed } from 'vue'
 import { site } from '@/content/site'
 import { renderRich } from '@/utils/rich'
+import { render } from '@/utils/template'
+import { buildVars } from '@/content/vars'
 
 const h = site.hero
+/** 变量上下文（响应式：GitHub 数据运行时刷新后会自动更新） */
+const vars = computed(() => buildVars())
+/** 渲染文案里的 {{ 变量 | 过滤器 }} */
+const r = (t?: string) => render(t, vars.value)
+/** 渲染「先模板、后 **强调**」的富文本 */
+const rich = (t?: string) => renderRich(r(t))
 </script>
 
 <template>
@@ -10,18 +19,18 @@ const h = site.hero
     <div class="hero__grid grid-bg" aria-hidden="true"></div>
     <div class="container hero__inner">
       <div class="hero__copy">
-        <p class="hero__kicker">{{ h.kicker }}</p>
+        <p class="hero__kicker">{{ r(h.kicker) }}</p>
         <p class="prompt hero__term">
           <span class="prompt__user">{{ h.term.user }}@{{ h.term.host }}</span
-          ><span class="prompt__path">:~$</span> {{ h.term.cmd
+          ><span class="prompt__path">:~$</span> {{ r(h.term.cmd)
           }}<span class="cursor" aria-hidden="true"></span>
         </p>
-        <h1 class="hero__title">{{ h.title }}</h1>
-        <p class="hero__sub">{{ h.subtitle }}</p>
-        <p class="hero__lead" v-html="renderRich(h.lead)"></p>
+        <h1 class="hero__title">{{ r(h.title) }}</h1>
+        <p class="hero__sub">{{ r(h.subtitle) }}</p>
+        <p class="hero__lead" v-html="rich(h.lead)"></p>
 
         <ul class="hero__tags">
-          <li v-for="t in h.tags" :key="t" class="tag">{{ t }}</li>
+          <li v-for="t in h.tags" :key="t" class="tag">{{ r(t) }}</li>
         </ul>
 
         <div class="hero__actions">
@@ -40,12 +49,23 @@ const h = site.hero
             <span class="term__dot term__dot--r"></span>
             <span class="term__dot term__dot--y"></span>
             <span class="term__dot term__dot--g"></span>
-            <span class="term__title">{{ h.terminal.title }}</span>
+            <span class="term__title">{{ r(h.terminal.title) }}</span>
           </div>
-          <pre class="term__body"><span class="c-cmd">{{ h.terminal.cmd }}</span>
-<template v-for="row in h.terminal.rows" :key="row.key">
-<span class="c-key">{{ row.key }}</span>       <span :class="'c-' + row.kind">{{ row.value }}</span>
-</template><span class="c-cmd">$ </span><span class="cursor cursor--sm"></span></pre>
+          <!-- 每行来自 site.hero.terminal.lines，文本支持 {{ 变量 }} 模板 -->
+          <div class="term__body">
+            <div v-for="(line, i) in h.terminal.lines" :key="i" class="term__line">
+              <template v-if="line.type === 'blank'">&nbsp;</template>
+              <template v-else-if="line.type === 'kv'">
+                <span class="c-key">{{ r(line.key) }}</span
+                ><span :class="'c-' + (line.tone || 'val')">{{ r(line.value) }}</span>
+              </template>
+              <template v-else-if="line.type === 'cmd'">
+                <span class="c-cmd">{{ r(line.text) }}</span
+                ><span v-if="line.cursor" class="cursor cursor--sm"></span>
+              </template>
+              <span v-else :class="'c-' + (line.tone || 'val')">{{ r(line.text) }}</span>
+            </div>
+          </div>
         </div>
       </div>
     </div>
@@ -176,10 +196,16 @@ const h = site.hero
   color: #c7cce0;
   overflow-x: auto;
 }
+.term__line {
+  white-space: pre;
+  min-height: 1.85em;
+}
 .c-cmd {
   color: #e6e9f5;
 }
 .c-key {
+  display: inline-block;
+  min-width: 9ch;
   color: #8b93ad;
 }
 .c-val {
