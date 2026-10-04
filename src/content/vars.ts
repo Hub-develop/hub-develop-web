@@ -64,7 +64,7 @@ export function buildVars(): Vars {
       count: projects.length,
       names: projects.map((p) => p.name),
       slugs: projects.map((p) => p.slug),
-      featured: featuredProjects.map((p) => p.name),
+      featured: featuredProjects.value.map((p) => p.name),
       list: projects,
     },
     /** 时间 */

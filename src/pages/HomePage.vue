@@ -5,6 +5,7 @@ import ProjectCard from '@/components/ProjectCard.vue'
 import { site, featuredProjects } from '@/content/site'
 import { renderRich } from '@/utils/rich'
 import { useGithub } from '@/content/github'
+import { t } from '@/i18n/ui'
 
 const about = site.about
 
@@ -26,10 +27,10 @@ const pct = (w: number) => `${Math.max(4, Math.round((w / maxWeight.value) * 100
         <div class="head" v-reveal>
           <div class="section-head">
             <p class="section-kicker">// featured</p>
-            <h2 class="section-title">精选项目</h2>
-            <p class="lead">我们正在积极开发与维护的部分项目。</p>
+            <h2 class="section-title">{{ t('home.featuredTitle') }}</h2>
+            <p class="lead">{{ t('home.featuredLead') }}</p>
           </div>
-          <RouterLink class="link-arrow head__more" to="/projects">全部项目</RouterLink>
+          <RouterLink class="link-arrow head__more" to="/projects">{{ t('home.allProjects') }}</RouterLink>
         </div>
         <div class="grid">
           <ProjectCard v-for="p in featuredProjects" :key="p.slug" :project="p" />
@@ -40,13 +41,11 @@ const pct = (w: number) => `${Math.max(4, Math.round((w / maxWeight.value) * 100
     <!-- 技术栈 & 标签（实时来自 GitHub，非写死） -->
     <section class="section section--soft">
       <div class="container">
-        <div class="section-head" v-reveal>
+          <div class="section-head" v-reveal>
           <p class="section-kicker">// stack</p>
-          <h2 class="section-title">技术栈与标签</h2>
+          <h2 class="section-title">{{ t('home.stackTitle') }}</h2>
           <p class="lead">
-            由 <strong>{{ gh.totals.repos }}</strong> 个公开仓库的语言分布实时聚合而来，覆盖
-            <strong>{{ gh.totals.stacks }}</strong> 项技术栈、<strong>{{ gh.totals.tags }}</strong>
-            个组织标签。
+            {{ t('home.stackLead', { n: gh.totals.repos, m: gh.totals.stacks, k: gh.totals.tags }) }}
           </p>
         </div>
 
@@ -56,12 +55,12 @@ const pct = (w: number) => `${Math.max(4, Math.round((w / maxWeight.value) * 100
             <span class="stack__track">
               <span class="stack__bar" :style="{ width: pct(s.weight) }"></span>
             </span>
-            <span class="stack__n">{{ s.repos }} 仓库</span>
+            <span class="stack__n">{{ s.repos }} {{ t('home.repoUnit') }}</span>
           </li>
         </ul>
 
         <div class="taghead" v-reveal>
-          <span class="taghead__k">组织标签</span>
+          <span class="taghead__k">{{ t('home.orgTags') }}</span>
           <ul class="orgtags">
             <li v-for="t in tags" :key="t.name" class="orgtag">{{ t.name }}</li>
           </ul>
@@ -74,7 +73,7 @@ const pct = (w: number) => `${Math.max(4, Math.round((w / maxWeight.value) * 100
       <div class="container">
         <div class="section-head" v-reveal>
           <p class="section-kicker">// about</p>
-          <h2 class="section-title">关于 {{ site.brand.name }}</h2>
+          <h2 class="section-title">{{ t('home.aboutTitle', { name: site.brand.name }) }}</h2>
           <p class="lead" v-html="renderRich(about.lead)"></p>
         </div>
 
@@ -88,7 +87,7 @@ const pct = (w: number) => `${Math.max(4, Math.round((w / maxWeight.value) * 100
         </div>
 
         <div class="more" v-reveal>
-          <RouterLink class="btn btn--ghost" to="/about">了解更多</RouterLink>
+          <RouterLink class="btn btn--ghost" to="/about">{{ t('home.learnMore') }}</RouterLink>
         </div>
       </div>
     </section>
@@ -99,13 +98,13 @@ const pct = (w: number) => `${Math.max(4, Math.round((w / maxWeight.value) * 100
         <div class="cta" v-reveal>
           <div>
             <p class="section-kicker">// get in touch</p>
-            <h2 class="section-title">想一起做点什么？</h2>
-            <p class="lead">无论是反馈问题、交流技术，还是加入协作，都欢迎找到我们。</p>
+            <h2 class="section-title">{{ t('home.ctaTitle') }}</h2>
+            <p class="lead">{{ t('home.ctaLead') }}</p>
           </div>
           <div class="cta__actions">
-            <RouterLink class="btn btn--primary" to="/contact">联系我们</RouterLink>
+            <RouterLink class="btn btn--primary" to="/contact">{{ t('home.contactUs') }}</RouterLink>
             <a class="btn btn--ghost" :href="site.brand.repo" target="_blank" rel="noopener">
-              在 GitHub 关注
+              {{ t('home.followGithub') }}
             </a>
           </div>
         </div>

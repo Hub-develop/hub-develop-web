@@ -2,6 +2,7 @@
 import type { Project } from '@/content/site'
 import { statusMeta } from '@/content/projects'
 import { relativeTime } from '@/utils/format'
+import { t } from '@/i18n/ui'
 
 defineProps<{ project: Project }>()
 </script>
@@ -27,11 +28,11 @@ defineProps<{ project: Project }>()
     <p class="pcard__meta">
       <span v-if="project.github.language" class="pcard__lang">{{ project.github.language }}</span>
       <span v-if="project.github.stars > 0">★ {{ project.github.stars }}</span>
-      <span class="pcard__upd">更新于 {{ relativeTime(project.github.pushedAt) }}</span>
+      <span class="pcard__upd">{{ t('card.updated') }} {{ relativeTime(project.github.pushedAt) }}</span>
     </p>
 
     <div class="pcard__foot">
-      <RouterLink class="link-arrow" :to="`/projects/${project.slug}`">查看详情</RouterLink>
+      <RouterLink class="link-arrow" :to="`/projects/${project.slug}`">{{ t('card.viewDetails') }}</RouterLink>
       <div class="pcard__links">
         <a
           v-for="l in project.links"

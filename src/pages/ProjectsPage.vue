@@ -2,6 +2,7 @@
 import { computed, ref } from 'vue'
 import ProjectCard from '@/components/ProjectCard.vue'
 import { site, projects } from '@/content/site'
+import { t } from '@/i18n/ui'
 
 /** 按「主语言」筛选（语言来自 GitHub，非写死） */
 type Filter = string
@@ -15,9 +16,9 @@ const languages = computed(() => {
 const hasOther = computed(() => projects.some((p) => !p.github.language))
 
 const filters = computed(() => [
-  { key: 'all', label: '全部' },
+  { key: 'all', label: t('projects.all') },
   ...languages.value.map((l) => ({ key: l, label: l })),
-  ...(hasOther.value ? [{ key: '__other__', label: '其他' }] : []),
+  ...(hasOther.value ? [{ key: '__other__', label: t('projects.other') }] : []),
 ])
 
 const list = computed(() => {
@@ -31,10 +32,10 @@ const list = computed(() => {
   <div class="page">
     <div class="container">
       <header class="phead" v-reveal>
-        <p class="section-kicker">// projects</p>
-        <h1 class="phead__title">核心项目</h1>
+        <p class="section-kicker">{{ t('projects.kicker') }}</p>
+        <h1 class="phead__title">{{ t('projects.title') }}</h1>
         <p class="lead">
-          {{ site.brand.name }} 正在开发与维护的开源项目，覆盖跨平台桌面、服务端、文档框架与操作系统等方向。
+          {{ t('projects.lead', { name: site.brand.name }) }}
         </p>
       </header>
 
@@ -53,22 +54,22 @@ const list = computed(() => {
             {{ f.label }}
           </button>
         </div>
-        <span class="count">{{ list.length }} 个项目</span>
+        <span class="count">{{ t('projects.count', { n: list.length }) }}</span>
       </div>
 
       <TransitionGroup name="list" tag="div" class="grid">
         <ProjectCard v-for="p in list" :key="p.slug" :project="p" />
       </TransitionGroup>
 
-      <p v-if="!list.length" class="empty">这个分类下暂时没有项目。</p>
+      <p v-if="!list.length" class="empty">{{ t('projects.empty') }}</p>
 
       <div class="tail" v-reveal>
         <div>
-          <h2 class="tail__title">有想法，或发现问题？</h2>
-          <p class="lead">在对应仓库提 Issue 是参与进来最快的方式。</p>
+          <h2 class="tail__title">{{ t('projects.tailTitle') }}</h2>
+          <p class="lead">{{ t('projects.tailLead') }}</p>
         </div>
         <a class="btn btn--primary" :href="site.brand.repo" target="_blank" rel="noopener">
-          前往 GitHub 组织
+          {{ t('projects.openGithub') }}
         </a>
       </div>
     </div>

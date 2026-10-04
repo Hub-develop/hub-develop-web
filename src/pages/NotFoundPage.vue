@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import { useRoute } from 'vue-router'
+import { t } from '@/i18n/ui'
 
 const route = useRoute()
 </script>

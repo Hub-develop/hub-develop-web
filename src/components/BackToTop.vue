@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import { onMounted, onUnmounted, ref } from 'vue'
+import { t } from '@/i18n/ui'
 
 const show = ref(false)
 const onScroll = () => {
@@ -16,7 +17,7 @@ onUnmounted(() => window.removeEventListener('scroll', onScroll))
 
 <template>
   <Transition name="btt">
-    <button v-show="show" class="btt" type="button" aria-label="回到顶部" @click="toTop">
+    <button v-show="show" class="btt" type="button" :aria-label="t('backToTop')" @click="toTop">
       <span aria-hidden="true">↑</span>
     </button>
   </Transition>

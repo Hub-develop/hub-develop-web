@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { ref } from 'vue'
 import { site } from '@/content/site'
+import { t } from '@/i18n/ui'
 
 const c = site.contact
 const copied = ref<string | null>(null)
@@ -44,10 +45,10 @@ async function copy(text: string) {
 
       <!-- 复制邮箱（真实可用） -->
       <div class="copy" v-reveal>
-        <span class="copy__label">邮箱地址</span>
+        <span class="copy__label">{{ t('contact.emailLabel') }}</span>
         <code class="copy__code">{{ site.brand.email }}</code>
         <button class="btn btn--ghost btn--sm" type="button" @click="copy(site.brand.email)">
-          {{ copied === site.brand.email ? '已复制' : '复制' }}
+          {{ copied === site.brand.email ? t('contact.copied') : t('contact.copy') }}
         </button>
       </div>
     </div>
@@ -55,7 +56,7 @@ async function copy(text: string) {
     <section class="section section--soft">
       <div class="container">
         <div class="section-head" v-reveal>
-          <p class="section-kicker">// join</p>
+          <p class="section-kicker">{{ t('contact.joinKicker') }}</p>
           <h2 class="section-title">{{ c.join.title }}</h2>
         </div>
         <ol class="steps">
@@ -68,11 +69,11 @@ async function copy(text: string) {
 
         <div class="cta" v-reveal>
           <div>
-            <h2 class="cta__title">准备好了吗？</h2>
-            <p class="lead">前往 GitHub 组织，挑一个你感兴趣的项目开始吧。</p>
+            <h2 class="cta__title">{{ t('contact.ready') }}</h2>
+            <p class="lead">{{ t('contact.ctaLead') }}</p>
           </div>
           <a class="btn btn--primary" :href="site.brand.repo" target="_blank" rel="noopener">
-            打开 GitHub 组织
+            {{ t('contact.openGithub') }}
           </a>
         </div>
       </div>

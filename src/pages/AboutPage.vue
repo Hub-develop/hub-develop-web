@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import { site } from '@/content/site'
+import { t } from '@/i18n/ui'
 
 const about = site.about
 </script>
@@ -29,9 +30,9 @@ const about = site.about
     <section class="section section--soft">
       <div class="container">
         <div class="section-head" v-reveal>
-          <p class="section-kicker">// focus</p>
-          <h2 class="section-title">专注方向</h2>
-          <p class="lead">我们把精力集中在四个方向，每个方向都有对应的项目在支撑。</p>
+          <p class="section-kicker">{{ t('about.focusKicker') }}</p>
+          <h2 class="section-title">{{ t('about.focusTitle') }}</h2>
+          <p class="lead">{{ t('about.focusLead') }}</p>
         </div>
 
         <div class="caps">
@@ -49,8 +50,8 @@ const about = site.about
     <section class="section">
       <div class="container">
         <div class="section-head" v-reveal>
-          <p class="section-kicker">// principles</p>
-          <h2 class="section-title">我们坚持的原则</h2>
+          <p class="section-kicker">{{ t('about.principlesKicker') }}</p>
+          <h2 class="section-title">{{ t('about.principlesTitle') }}</h2>
         </div>
 
         <ol class="principles">
@@ -65,12 +66,12 @@ const about = site.about
 
         <div class="cta" v-reveal>
           <div>
-            <h2 class="cta__title">想看我们做了什么？</h2>
-            <p class="lead">项目页里有全部正在开发和维护的项目。</p>
+            <h2 class="cta__title">{{ t('about.ctaTitle') }}</h2>
+            <p class="lead">{{ t('about.ctaLead') }}</p>
           </div>
           <div class="cta__actions">
-            <RouterLink class="btn btn--primary" to="/projects">浏览项目</RouterLink>
-            <RouterLink class="btn btn--ghost" to="/contact">联系我们</RouterLink>
+            <RouterLink class="btn btn--primary" to="/projects">{{ t('about.browse') }}</RouterLink>
+            <RouterLink class="btn btn--ghost" to="/contact">{{ t('about.contact') }}</RouterLink>
           </div>
         </div>
       </div>

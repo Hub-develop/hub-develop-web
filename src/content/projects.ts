@@ -1,21 +1,27 @@
 /* ============================================================
- * Hub-develop · 项目数据（由 GitHub 驱动）
+ * Hub-develop · 项目数据（由 GitHub 驱动，双语）
  * ------------------------------------------------------------
  * 项目不再是手写死的数据 —— 它来自真实仓库：
  *
  *   github.json.repos（数量 / 语言 / topics / star / 更新时间…）
  *        ＋
- *   overrides.ts（可选的补充中文文案）
+ *   overrides.ts（可选的补充多语言文案）
  *        ↓
  *   projects: Project[]  → 卡片、列表、详情页
  *
  * 也就是说：仓库里加了新语言、改了描述、多了 star，重新构建后
- * 站点会自动跟着变；想补中文介绍，只改 overrides.ts。
+ * 站点会自动跟着变；想补介绍，只改 overrides.ts。
+ *
+ * 全部文本按当前 locale 解析；切换语言时 projects / featuredProjects
+ * / statusMeta 会就地重建，组件无需改动访问方式。
  * ============================================================ */
 
+import { computed, reactive, watch } from 'vue'
+import { locale } from '@/i18n'
+import type { Locale } from '@/i18n'
 import { githubData, statusFromPushedAt } from './github'
 import type { GitHubRepo } from './github'
-import { getOverride } from './overrides'
+import { getOverride, pickTr } from './overrides'
 
 export type ProjectStatus = 'active' | 'maintained' | 'beta'
 
@@ -69,11 +75,19 @@ export interface Project {
 }
 
 /** 三种状态在 UI 上的文案与说明 */
-export const statusMeta: Record<ProjectStatus, { label: string; hint: string }> = {
+const statusMetaZH: Record<ProjectStatus, { label: string; hint: string }> = {
   active: { label: '更新中', hint: '正在积极开发，持续有新提交' },
   maintained: { label: '维护中', hint: '功能趋于稳定，按需修复与迭代' },
   beta: { label: '实验', hint: '早期探索阶段，形态仍可能变化' },
 }
+const statusMetaEN: Record<ProjectStatus, { label: string; hint: string }> = {
+  active: { label: 'Active', hint: 'Under active development with steady commits' },
+  maintained: { label: 'Maintained', hint: 'Stable features, fixed and iterated as needed' },
+  beta: { label: 'Experimental', hint: 'Early exploration; shape may still change' },
+}
+export const statusMeta = computed(() =>
+  locale.value === 'en' ? statusMetaEN : statusMetaZH,
+)
 
 /** 仓库名 → URL slug（MChub → mchub，MCBEforMacOS-CodeHub → mcbeforemacos-codehub） */
 export function repoSlug(name: string): string {
@@ -94,7 +108,7 @@ function stackFromLanguages(langs: Record<string, number>, fallback: string): st
   return fallback ? [fallback] : []
 }
 
-function buildProject(repo: GitHubRepo): Project {
+function buildProject(repo: GitHubRepo, lang: Locale): Project {
   const slug = repoSlug(repo.name)
   const ov = getOverride(slug)
 
@@ -107,13 +121,13 @@ function buildProject(repo: GitHubRepo): Project {
 
   return {
     slug,
-    name: ov?.name ?? repo.name,
-    tag: ov?.tag ?? repo.orgLabel,
+    name: pickTr(ov?.name, lang) || repo.name,
+    tag: pickTr(ov?.tag, lang) || repo.orgLabel,
     status: statusFromPushedAt(repo.pushedAt, repo.archived),
-    summary: ov?.summary ?? repo.description ?? '（暂无描述）',
-    description: ov?.description ?? (repo.description ? [repo.description] : []),
+    summary: pickTr(ov?.summary, lang) || repo.description || '（暂无描述）',
+    description: (ov?.description?.map((d) => pickTr(d, lang)) ?? (repo.description ? [repo.description] : [])),
     stack: stackFromLanguages(repo.languages, repo.language),
-    highlights: ov?.highlights ?? [],
+    highlights: ov?.highlights?.map((h) => pickTr(h, lang)) ?? [],
     links,
     featured: ov?.featured ?? false,
     github: {
@@ -127,15 +141,23 @@ function buildProject(repo: GitHubRepo): Project {
       license: repo.license,
       homepage: repo.homepage,
     },
-    extraTags: ov?.extraTags ?? [],
+    extraTags: ov?.extraTags?.map((t) => pickTr(t, lang)) ?? [],
   }
 }
 
 /** 全部项目（顺序即 GitHub 快照里的顺序：按最近推送） */
-export const projects: Project[] = githubData.repos.map(buildProject)
+export const projects = reactive<Project[]>(
+  githubData.repos.map((r) => buildProject(r, locale.value)),
+)
+
+/** 语言切换时就地重建项目列表（名称 / 简介等随语言变化） */
+watch(locale, (l) => {
+  const next = githubData.repos.map((r) => buildProject(r, l))
+  projects.splice(0, projects.length, ...next)
+})
 
 /** 首页精选项目 */
-export const featuredProjects = projects.filter((p) => p.featured)
+export const featuredProjects = computed(() => projects.filter((p) => p.featured))
 
 /** 按 slug 取单个项目 */
 export function getProject(slug: string): Project | undefined {

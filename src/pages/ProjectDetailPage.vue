@@ -2,6 +2,7 @@
 import { computed } from 'vue'
 import { getProject, getProjectNeighbors, statusMeta } from '@/content/projects'
 import { relativeTime, humanSize } from '@/utils/format'
+import { t } from '@/i18n/ui'
 
 const props = defineProps<{ slug: string }>()
 
@@ -15,9 +16,9 @@ const neighbors = computed(() => getProjectNeighbors(props.slug))
       <template v-if="project">
         <!-- 面包屑 -->
         <nav class="crumb" aria-label="面包屑">
-          <RouterLink to="/">首页</RouterLink>
+          <RouterLink to="/">{{ t('detail.home') }}</RouterLink>
           <span aria-hidden="true">/</span>
-          <RouterLink to="/projects">项目</RouterLink>
+          <RouterLink to="/projects">{{ t('detail.projects') }}</RouterLink>
           <span aria-hidden="true">/</span>
           <span class="crumb__cur">{{ project.name }}</span>
         </nav>
@@ -44,7 +45,7 @@ const neighbors = computed(() => getProjectNeighbors(props.slug))
               rel="noopener"
               >{{ l.label }}</a
             >
-            <RouterLink class="btn btn--ghost" to="/projects">返回列表</RouterLink>
+            <RouterLink class="btn btn--ghost" to="/projects">{{ t('detail.backList') }}</RouterLink>
           </div>
         </header>
 
@@ -52,12 +53,12 @@ const neighbors = computed(() => getProjectNeighbors(props.slug))
         <div class="body">
           <div class="body__main">
             <section class="block" v-reveal>
-              <h2 class="block__title">项目简介</h2>
+              <h2 class="block__title">{{ t('detail.aboutTitle') }}</h2>
               <p v-for="(para, i) in project.description" :key="i" class="block__p">{{ para }}</p>
             </section>
 
             <section class="block" v-reveal>
-              <h2 class="block__title">能力亮点</h2>
+              <h2 class="block__title">{{ t('detail.highlights') }}</h2>
               <ul class="feat">
                 <li v-for="h in project.highlights" :key="h" class="feat__item">
                   <span class="feat__dot" aria-hidden="true"></span>
@@ -70,7 +71,7 @@ const neighbors = computed(() => getProjectNeighbors(props.slug))
           <aside class="body__aside">
             <div class="meta card" v-reveal>
               <div class="meta__row">
-                <span class="meta__k">状态</span>
+                <span class="meta__k">{{ t('detail.status') }}</span>
                 <span class="badge" :class="'badge--' + project.status">
                   <span class="badge__dot"></span>{{ statusMeta[project.status].label }}
                 </span>
@@ -79,41 +80,41 @@ const neighbors = computed(() => getProjectNeighbors(props.slug))
 
               <div class="meta__sep"></div>
 
-              <span class="meta__k">技术栈</span>
+              <span class="meta__k">{{ t('detail.stack') }}</span>
               <ul class="meta__stack">
                 <li v-for="s in project.stack" :key="s" class="tag">{{ s }}</li>
               </ul>
 
               <div class="meta__sep"></div>
 
-              <span class="meta__k">GitHub 数据</span>
+              <span class="meta__k">{{ t('detail.githubData') }}</span>
               <ul class="meta__gh">
                 <li>
-                  <span>语言</span><span>{{ project.github.language || '—' }}</span>
+                  <span>{{ t('detail.language') }}</span><span>{{ project.github.language || '—' }}</span>
                 </li>
                 <li>
-                  <span>Star</span><span>{{ project.github.stars }}</span>
+                  <span>{{ t('detail.star') }}</span><span>{{ project.github.stars }}</span>
                 </li>
                 <li>
-                  <span>Fork</span><span>{{ project.github.forks }}</span>
+                  <span>{{ t('detail.fork') }}</span><span>{{ project.github.forks }}</span>
                 </li>
                 <li>
-                  <span>Issues</span><span>{{ project.github.openIssues }}</span>
+                  <span>{{ t('detail.issues') }}</span><span>{{ project.github.openIssues }}</span>
                 </li>
                 <li>
-                  <span>体积</span><span>{{ humanSize(project.github.size) }}</span>
+                  <span>{{ t('detail.size') }}</span><span>{{ humanSize(project.github.size) }}</span>
                 </li>
                 <li>
-                  <span>许可证</span><span>{{ project.github.license || '—' }}</span>
+                  <span>{{ t('detail.license') }}</span><span>{{ project.github.license || '—' }}</span>
                 </li>
                 <li>
-                  <span>最近更新</span><span>{{ relativeTime(project.github.pushedAt) }}</span>
+                  <span>{{ t('detail.updated') }}</span><span>{{ relativeTime(project.github.pushedAt) }}</span>
                 </li>
               </ul>
 
               <div class="meta__sep"></div>
 
-              <span class="meta__k">相关链接</span>
+              <span class="meta__k">{{ t('detail.links') }}</span>
               <ul class="meta__links">
                 <li v-for="l in project.links" :key="l.label">
                   <a :href="l.href" target="_blank" rel="noopener">{{ l.label }} ↗</a>
@@ -130,7 +131,7 @@ const neighbors = computed(() => getProjectNeighbors(props.slug))
             class="neigh__item card"
             :to="`/projects/${neighbors.prev.slug}`"
           >
-            <span class="neigh__dir">← 上一个</span>
+            <span class="neigh__dir">← {{ t('detail.prev') }}</span>
             <span class="neigh__name">{{ neighbors.prev.name }}</span>
           </RouterLink>
           <span v-else class="neigh__spacer"></span>
@@ -140,7 +141,7 @@ const neighbors = computed(() => getProjectNeighbors(props.slug))
             class="neigh__item neigh__item--right card"
             :to="`/projects/${neighbors.next.slug}`"
           >
-            <span class="neigh__dir">下一个 →</span>
+            <span class="neigh__dir">{{ t('detail.next') }} →</span>
             <span class="neigh__name">{{ neighbors.next.name }}</span>
           </RouterLink>
         </nav>
@@ -148,9 +149,9 @@ const neighbors = computed(() => getProjectNeighbors(props.slug))
 
       <!-- 兜底（正常会被路由守卫拦到 404） -->
       <div v-else class="missing">
-        <h1>找不到这个项目</h1>
-        <p class="lead">slug「{{ props.slug }}」不在项目列表中。</p>
-        <RouterLink class="btn btn--primary" to="/projects">浏览全部项目</RouterLink>
+        <h1>{{ t('detail.missingTitle') }}</h1>
+        <p class="lead">{{ t('detail.missingLead', { slug: props.slug }) }}</p>
+        <RouterLink class="btn btn--primary" to="/projects">{{ t('detail.browseAll') }}</RouterLink>
       </div>
     </div>
   </div>

@@ -2,6 +2,7 @@
 import { onMounted, onUnmounted, ref, watch } from 'vue'
 import { useRoute } from 'vue-router'
 import { site } from '@/content/site'
+import { locale, setLocale } from '@/i18n'
 
 const scrolled = ref(false)
 const open = ref(false)
@@ -42,6 +43,25 @@ watch(
         GitHub
       </a>
 
+      <div class="nav__lang" role="group" aria-label="Language">
+        <button
+          type="button"
+          class="nav__lang-btn"
+          :class="{ 'is-on': locale === 'zh' }"
+          @click="setLocale('zh')"
+        >
+          中
+        </button>
+        <button
+          type="button"
+          class="nav__lang-btn"
+          :class="{ 'is-on': locale === 'en' }"
+          @click="setLocale('en')"
+        >
+          EN
+        </button>
+      </div>
+
       <button
         class="nav__burger"
         type="button"
@@ -58,6 +78,24 @@ watch(
         <div class="container">
           <RouterLink v-for="n in site.nav" :key="n.to" :to="n.to">{{ n.label }}</RouterLink>
           <a :href="site.brand.repo" target="_blank" rel="noopener">GitHub ↗</a>
+          <div class="nav__lang nav__lang--mobile" role="group" aria-label="Language">
+            <button
+              type="button"
+              class="nav__lang-btn"
+              :class="{ 'is-on': locale === 'zh' }"
+              @click="setLocale('zh')"
+            >
+              中
+            </button>
+            <button
+              type="button"
+              class="nav__lang-btn"
+              :class="{ 'is-on': locale === 'en' }"
+              @click="setLocale('en')"
+            >
+              EN
+            </button>
+          </div>
         </div>
       </nav>
     </Transition>
@@ -124,6 +162,39 @@ watch(
 }
 .nav__gh {
   margin-left: auto;
+}
+.nav__lang {
+  display: flex;
+  align-items: center;
+  gap: 0.2rem;
+  padding: 0.2rem;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  background: var(--bg-soft);
+}
+.nav__lang-btn {
+  min-width: 30px;
+  padding: 0.22rem 0.5rem;
+  border: 0;
+  border-radius: 999px;
+  background: transparent;
+  color: var(--ink-soft);
+  font-family: var(--mono);
+  font-size: 0.8rem;
+  font-weight: 650;
+  cursor: pointer;
+  transition: background 0.16s ease, color 0.16s ease;
+}
+.nav__lang-btn:hover {
+  color: var(--ink);
+}
+.nav__lang-btn.is-on {
+  background: var(--accent);
+  color: #06281d;
+}
+.nav__lang--mobile {
+  justify-content: center;
+  margin-top: 0.4rem;
 }
 .nav__burger {
   display: none;
