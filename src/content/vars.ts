@@ -6,7 +6,6 @@
  *
  * 可用变量（节选）：
  *   {{ site.brand.name }}            组织名            Hub-develop
- *   {{ site.brand.org }}             关联组织          CodeHub
  *   {{ totals.repos }}               收录仓库数         6
  *   {{ totals.stacks }}              技术栈项数         34
  *   {{ totals.tags }}                标签数             9
