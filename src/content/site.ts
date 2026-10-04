@@ -114,7 +114,7 @@ const hero = {
   kicker: '为开源开发者打造跨平台、可持续迭代的工程底座',
   term: { user: 'guest', host: 'hub-develop', cmd: 'whoami' },
   title: brand.name,
-  subtitle: '源自 CodeHub 的上游组织。',
+  subtitle: '源自 CodeHub 的开源组织。',
   lead: '我们把通用、可复用的底层工程能力沉淀在这里，再以更产品化的形态在 CodeHub 下对外发布。',
   tags: [
     '跨平台',
@@ -139,7 +139,6 @@ const hero = {
     lines: [
       { type: 'cmd', text: '$ hub-develop --about' },
       { type: 'kv', key: 'org', value: '{{ site.brand.name }}' },
-      { type: 'kv', key: 'upstream', value: '{{ site.brand.org | default:"—" }}' },
       { type: 'kv', key: 'repos', value: '{{ totals.repos }} public' },
       { type: 'kv', key: 'stacks', value: '{{ stacks.top | take:"4, · " }}' },
       { type: 'kv', key: 'topics', value: '{{ tags.top | take:"6, " }}' },
@@ -158,10 +157,10 @@ const about = {
   kicker: '// about',
   title: '关于 Hub-develop',
   /** 首页预览段落（可含 **强调**，由组件按需渲染） */
-  lead: 'Hub-develop 是 **CodeHub 的上游组织**，定位于底层能力与研究。我们把通用、可复用的工程能力沉淀在这里，再以更产品化的形态在 CodeHub 下对外发布。',
+  lead: 'Hub-develop 与 CodeHub 协同，定位于底层能力与研究。我们把通用、可复用的工程能力沉淀在这里，再以更产品化的形态在 CodeHub 下对外发布。',
   /** /about 详情页的正文段落 */
   story: [
-    'Hub-develop 是 CodeHub 的上游组织，也是这些项目「最早被写下」的地方。',
+    'Hub-develop 与 CodeHub 协同，也是这些项目「最早被写下」的地方。',
     '我们相信好的工具应该先被自己用起来：跨平台的桌面启动器、一键部署的服务端、可复用的文档框架、以及从源码出发的操作系统探索——它们都源于真实的使用需求，而不是为了做而做。',
     '在这里，通用的、底层的、可复用的能力被沉淀成项目；打磨成熟之后，再以更产品化的形态在 CodeHub 组织下发布给更多人。',
     '我们不追求项目数量，只在乎每一件是否真的解决了问题。功能必须真实可用——这是我们最在意的一条底线。',
@@ -244,13 +243,6 @@ const contact = {
       desc: '合作、投稿或不便公开的反馈，欢迎邮件联系。',
       mark: '@',
     },
-    {
-      label: '上游组织',
-      value: brand.org,
-      href: brand.orgUrl,
-      desc: '我们沉淀的上游能力，也会以产品化形态在此发布。',
-      mark: 'CH',
-    },
   ] as ContactChannel[],
   join: {
     title: '如何参与',
@@ -292,7 +284,7 @@ const seo = {
   },
   contact: {
     title: `联系 · ${brand.name}`,
-    description: '通过 GitHub、邮箱或上游组织，与 Hub-develop 取得联系。',
+    description: '通过 GitHub 或邮箱，与 Hub-develop 取得联系。',
   },
   notFound: {
     title: `页面走丢了 · ${brand.name}`,
