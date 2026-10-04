@@ -59,19 +59,16 @@ export interface ContactChannel {
 const brand = {
   name: 'Hub-develop',
   /** 导航栏 / 页脚的小 logo 文字 */
-  short: 'HD',
+  short: 'Hub',
   tagline: 'CodeHub 的上游开源组织',
   description:
-    'Hub-develop 是 CodeHub 的上游开源组织，专注跨平台桌面、服务端、文档框架与操作系统方向。',
+    'Hub,connect AI,PC,and User.',
   /** 展示用的域名文本 */
-  domain: 'hub-develop.github.io',
+  domain: 'hub-develop.top',
   /** 组织 GitHub 地址 */
   repo: 'https://github.com/Hub-develop',
-  /** 上游组织 */
-  org: 'CodeHub',
-  orgUrl: 'https://github.com/CodeHub-develop',
   /** 联系邮箱 */
-  email: 'contact@hub-develop.dev',
+  email: '',
 }
 
 /* ---------------------------------------------------------- */
