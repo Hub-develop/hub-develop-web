@@ -74,7 +74,7 @@ watch(
 }
 .nav--scrolled,
 .nav--open {
-  background: rgba(255, 255, 255, 0.85);
+  background: rgba(10, 11, 16, 0.82);
   backdrop-filter: saturate(180%) blur(14px);
   border-bottom-color: var(--line);
 }

@@ -155,7 +155,7 @@ const pct = (w: number) => `${Math.max(4, Math.round((w / maxWeight.value) * 100
 .stack__track {
   height: 9px;
   border-radius: 999px;
-  background: #fff;
+  background: rgba(255, 255, 255, 0.08);
   border: 1px solid var(--line);
   overflow: hidden;
 }

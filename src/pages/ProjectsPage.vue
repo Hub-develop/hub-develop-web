@@ -108,7 +108,7 @@ const list = computed(() => {
   padding: 0.42rem 1rem;
   border-radius: 999px;
   border: 1px solid var(--line);
-  background: #fff;
+  background: rgba(255, 255, 255, 0.05);
   color: var(--ink-soft);
   font-size: 0.88rem;
   font-weight: 650;
@@ -120,9 +120,9 @@ const list = computed(() => {
   color: var(--ink);
 }
 .chip--on {
-  background: var(--ink);
-  border-color: var(--ink);
-  color: #fff;
+  background: var(--accent);
+  border-color: var(--accent);
+  color: #06281d;
 }
 .count {
   font-family: var(--mono);

@@ -169,7 +169,7 @@ const about = site.about
   padding: 1.5rem 1.4rem;
   border: 1px solid var(--line);
   border-radius: var(--radius);
-  background: #fff;
+  background: var(--dark-2);
 }
 .pr__idx {
   font-family: var(--mono);

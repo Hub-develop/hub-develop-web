@@ -111,10 +111,9 @@ export const projectOverrides: Record<string, ProjectOverride> = {
   webhub: {
     name: 'WebHub',
     tag: 'Web / 安全',
-    summary: '围绕网站与网络安全的实验与工具集合。',
+    summary: '浏览器',
     description: [
-      'WebHub 是围绕网站建设与网络安全方向的实验与工具集合。',
-      '目前处于早期阶段，后续会沉淀成可复用的能力。',
+      'WebHub 是一个基于.NET的浏览器.。'
     ],
     highlights: [],
   },

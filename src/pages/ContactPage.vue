@@ -169,7 +169,7 @@ async function copy(text: string) {
   padding: 1.5rem 1.4rem;
   border: 1px solid var(--line);
   border-radius: var(--radius);
-  background: #fff;
+  background: var(--dark-2);
 }
 .step__idx {
   font-family: var(--mono);
@@ -197,7 +197,7 @@ async function copy(text: string) {
   padding: 2.2rem;
   border: 1px solid var(--line);
   border-radius: var(--radius);
-  background: #fff;
+  background: var(--dark-2);
 }
 .cta__title {
   font-size: 1.3rem;

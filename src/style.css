@@ -1,6 +1,6 @@
 /* ============================================================
  * Hub-develop · 全局设计系统
- * 明亮 studio 风（网格 / 大标题 / 胶囊） + 深色 tiouo 风页脚
+ * 整站深色主题（薄荷绿强调，呼应组织图标）
  * ============================================================ */
 
 /* 阿里妈妈方圆体 VF —— 阿里巴巴免费可商用双轴可变中文字体（字重 200–700）
@@ -14,16 +14,16 @@
 }
 
 :root {
-  /* 文字与线 */
-  --ink: #0b0b0f;
-  --ink-soft: #41414c;
-  --muted: #6b7280;
-  --line: #e6e8ec;
-  --line-strong: #d3d7de;
+  /* 文字与线（整站深色） */
+  --ink: #f4f5f8;
+  --ink-soft: #c7ccd6;
+  --muted: #8b90a3;
+  --line: rgba(255, 255, 255, 0.10);
+  --line-strong: rgba(255, 255, 255, 0.18);
 
-  /* 底色 */
-  --bg: #ffffff;
-  --bg-soft: #f7f8fa;
+  /* 底色（整站深色） */
+  --bg: #0a0b10;
+  --bg-soft: #12141d;
 
   /* 强调色（薄荷绿，取自组织图标） */
   --accent: #6feec2;
@@ -131,7 +131,7 @@ strong {
   font-size: 0.8rem;
   letter-spacing: 0.14em;
   text-transform: uppercase;
-  color: var(--accent-ink);
+  color: var(--accent);
   margin-bottom: 0.6rem;
 }
 .section-title {
@@ -147,13 +147,13 @@ strong {
   max-width: 60ch;
 }
 .lead strong {
-  color: var(--accent-ink);
+  color: var(--accent);
 }
 
 /* ---------- grid background ---------- */
 .grid-bg {
-  background-image: linear-gradient(to right, rgba(15, 23, 42, 0.055) 1px, transparent 1px),
-    linear-gradient(to bottom, rgba(15, 23, 42, 0.055) 1px, transparent 1px);
+  background-image: linear-gradient(to right, rgba(255, 255, 255, 0.05) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(255, 255, 255, 0.05) 1px, transparent 1px);
   background-size: 46px 46px;
   -webkit-mask-image: radial-gradient(ellipse 90% 80% at 50% 0%, #000 55%, transparent 100%);
   mask-image: radial-gradient(ellipse 90% 80% at 50% 0%, #000 55%, transparent 100%);
@@ -175,15 +175,15 @@ strong {
   white-space: nowrap;
 }
 .btn--primary {
-  background: var(--ink);
-  color: #fff;
+  background: var(--accent);
+  color: #06281d;
 }
 .btn--primary:hover {
   transform: translateY(-2px);
-  box-shadow: 0 12px 26px rgba(11, 11, 15, 0.22);
+  box-shadow: 0 12px 26px rgba(111, 238, 194, 0.3);
 }
 .btn--ghost {
-  background: #fff;
+  background: rgba(255, 255, 255, 0.04);
   color: var(--ink);
   border-color: var(--line-strong);
 }
@@ -201,7 +201,7 @@ strong {
   gap: 0.3rem;
   font-weight: 650;
   font-size: 0.9rem;
-  color: var(--accent-ink);
+  color: var(--accent);
 }
 .link-arrow::after {
   content: "→";
@@ -226,7 +226,7 @@ strong {
 .tag--accent {
   background: var(--accent-soft);
   border-color: transparent;
-  color: var(--accent-ink);
+  color: var(--accent);
 }
 .badge {
   display: inline-flex;
@@ -246,7 +246,7 @@ strong {
 }
 .badge--active {
   background: var(--accent-soft);
-  color: var(--accent-ink);
+  color: var(--accent);
 }
 .badge--maintained {
   background: var(--emerald-soft);
@@ -259,7 +259,7 @@ strong {
 
 /* ---------- cards ---------- */
 .card {
-  background: #fff;
+  background: var(--dark-2);
   border: 1px solid var(--line);
   border-radius: var(--radius);
   transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
@@ -303,7 +303,7 @@ strong {
   color: var(--muted);
 }
 .prompt__user {
-  color: var(--accent-ink);
+  color: var(--accent);
   font-weight: 600;
 }
 .prompt__path {
