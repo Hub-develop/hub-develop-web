@@ -15,11 +15,11 @@ const route = useRoute()
       <p class="nf__err">cd: no such file or directory</p>
 
       <h1 class="nf__code">404</h1>
-      <p class="nf__text">你要找的页面不存在，或者已经被移动到别处了。</p>
+      <p class="nf__text">{{ t('nf.text') }}</p>
 
       <div class="nf__actions">
-        <RouterLink class="btn btn--primary" to="/">回到首页</RouterLink>
-        <RouterLink class="btn btn--ghost" to="/projects">看看项目</RouterLink>
+        <RouterLink class="btn btn--primary" to="/">{{ t('nf.home') }}</RouterLink>
+        <RouterLink class="btn btn--ghost" to="/projects">{{ t('nf.projects') }}</RouterLink>
       </div>
     </div>
   </div>
