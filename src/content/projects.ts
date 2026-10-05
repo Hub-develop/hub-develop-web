@@ -17,8 +17,7 @@
  * ============================================================ */
 
 import { computed } from 'vue'
-import { locale } from '@/i18n'
-import type { Locale } from '@/i18n'
+import { locale, DEFAULT_LOCALE, type Locale } from '@/i18n'
 import { githubData, statusFromPushedAt } from './github'
 import type { GitHubRepo } from './github'
 import { getOverride, pickTr } from './overrides'
@@ -74,19 +73,31 @@ export interface Project {
   extraTags: string[]
 }
 
-/** 三种状态在 UI 上的文案与说明 */
-const statusMetaZH: Record<ProjectStatus, { label: string; hint: string }> = {
-  active: { label: '更新中', hint: '正在积极开发，持续有新提交' },
-  maintained: { label: '维护中', hint: '功能趋于稳定，按需修复与迭代' },
-  beta: { label: '实验', hint: '早期探索阶段，形态仍可能变化' },
+/** 三种状态在 UI 上的文案与说明（按语言） */
+const statusMetaAll: Record<Locale, Record<ProjectStatus, { label: string; hint: string }>> = {
+  zh: {
+    active: { label: '更新中', hint: '正在积极开发，持续有新提交' },
+    maintained: { label: '维护中', hint: '功能趋于稳定，按需修复与迭代' },
+    beta: { label: '实验', hint: '早期探索阶段，形态仍可能变化' },
+  },
+  en: {
+    active: { label: 'Active', hint: 'Under active development with steady commits' },
+    maintained: { label: 'Maintained', hint: 'Stable features, fixed and iterated as needed' },
+    beta: { label: 'Experimental', hint: 'Early exploration; shape may still change' },
+  },
+  ja: {
+    active: { label: '更新中', hint: '活発に開発中。新しいコミットが続いています' },
+    maintained: { label: '保守中', hint: '機能は安定。必要に応じて修正・反復' },
+    beta: { label: '実験', hint: '初期探索段階。形はまだ変わる可能性があります' },
+  },
+  ko: {
+    active: { label: '업데이트 중', hint: '적극적으로 개발 중이며 꾸준히 커밋됩니다' },
+    maintained: { label: '유지보수 중', hint: '기능이 안정적이며 필요에 따라 수정·반복' },
+    beta: { label: '실험', hint: '초기 탐색 단계. 형태는 바뀔 수 있습니다' },
+  },
 }
-const statusMetaEN: Record<ProjectStatus, { label: string; hint: string }> = {
-  active: { label: 'Active', hint: 'Under active development with steady commits' },
-  maintained: { label: 'Maintained', hint: 'Stable features, fixed and iterated as needed' },
-  beta: { label: 'Experimental', hint: 'Early exploration; shape may still change' },
-}
-export const statusMeta = computed(() =>
-  locale.value === 'en' ? statusMetaEN : statusMetaZH,
+export const statusMeta = computed(
+  () => statusMetaAll[locale.value] ?? statusMetaAll[DEFAULT_LOCALE],
 )
 
 /** 仓库名 → URL slug（MChub → mchub，MCBEforMacOS-CodeHub → mcbeforemacos-codehub） */
@@ -108,13 +119,19 @@ function stackFromLanguages(langs: Record<string, number>, fallback: string): st
   return fallback ? [fallback] : []
 }
 
+/** 详情页「相关链接」的标签（按语言） */
+const linkLabels: Record<Locale, { github: string; homepage: string; issues: string; noDesc: string }> = {
+  zh: { github: 'GitHub', homepage: '主页', issues: '问题反馈', noDesc: '（暂无描述）' },
+  en: { github: 'GitHub', homepage: 'Homepage', issues: 'Report issue', noDesc: '(No description yet)' },
+  ja: { github: 'GitHub', homepage: 'ホームページ', issues: 'Issue を報告', noDesc: '（説明なし）' },
+  ko: { github: 'GitHub', homepage: '홈페이지', issues: 'Issue 신고', noDesc: '（설명 없음）' },
+}
+
 function buildProject(repo: GitHubRepo, lang: Locale): Project {
   const slug = repoSlug(repo.name)
   const ov = getOverride(slug)
 
-  const labels = lang === 'en'
-    ? { github: 'GitHub', homepage: 'Homepage', issues: 'Report issue', noDesc: '(No description yet)' }
-    : { github: 'GitHub', homepage: '主页', issues: '问题反馈', noDesc: '（暂无描述）' }
+  const labels = linkLabels[lang] ?? linkLabels[DEFAULT_LOCALE]
   const links: ProjectLink[] = [{ label: labels.github, href: repo.url, variant: 'solid' }]
   if (repo.homepage) {
     links.push({ label: labels.homepage, href: repo.homepage, variant: 'outline' })

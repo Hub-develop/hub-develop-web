@@ -15,8 +15,6 @@ export const en: Record<string, string> = {
   /* nav / common */
   'nav.menu': 'Toggle menu',
   'nav.github': 'GitHub',
-  'lang.zh': '中文',
-  'lang.en': 'EN',
 
   /* home */
   'home.featuredTitle': 'Featured projects',

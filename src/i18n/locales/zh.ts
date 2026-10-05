@@ -14,8 +14,6 @@ export const zh: Record<string, string> = {
   /* 导航 / 通用 */
   'nav.menu': '切换菜单',
   'nav.github': 'GitHub',
-  'lang.zh': '中文',
-  'lang.en': 'EN',
 
   /* 首页 */
   'home.featuredTitle': '精选项目',
