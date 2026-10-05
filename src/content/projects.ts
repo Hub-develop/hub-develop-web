@@ -112,11 +112,14 @@ function buildProject(repo: GitHubRepo, lang: Locale): Project {
   const slug = repoSlug(repo.name)
   const ov = getOverride(slug)
 
-  const links: ProjectLink[] = [{ label: 'GitHub', href: repo.url, variant: 'solid' }]
+  const labels = lang === 'en'
+    ? { github: 'GitHub', homepage: 'Homepage', issues: 'Report issue', noDesc: '(No description yet)' }
+    : { github: 'GitHub', homepage: '主页', issues: '问题反馈', noDesc: '（暂无描述）' }
+  const links: ProjectLink[] = [{ label: labels.github, href: repo.url, variant: 'solid' }]
   if (repo.homepage) {
-    links.push({ label: '主页', href: repo.homepage, variant: 'outline' })
+    links.push({ label: labels.homepage, href: repo.homepage, variant: 'outline' })
   } else {
-    links.push({ label: '问题反馈', href: `${repo.url}/issues`, variant: 'outline' })
+    links.push({ label: labels.issues, href: `${repo.url}/issues`, variant: 'outline' })
   }
 
   return {
@@ -124,7 +127,7 @@ function buildProject(repo: GitHubRepo, lang: Locale): Project {
     name: pickTr(ov?.name, lang) || repo.name,
     tag: pickTr(ov?.tag, lang) || repo.orgLabel,
     status: statusFromPushedAt(repo.pushedAt, repo.archived),
-    summary: pickTr(ov?.summary, lang) || repo.description || '（暂无描述）',
+    summary: pickTr(ov?.summary, lang) || repo.description || labels.noDesc,
     description: (ov?.description?.map((d) => pickTr(d, lang)) ?? (repo.description ? [repo.description] : [])),
     stack: stackFromLanguages(repo.languages, repo.language),
     highlights: ov?.highlights?.map((h) => pickTr(h, lang)) ?? [],
