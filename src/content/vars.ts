@@ -33,9 +33,9 @@ export function buildVars(): Vars {
 
   return {
     /** 整个站点配置，可写 {{ site.xxx }} */
-    site,
+    site: site.value,
     /** 品牌快捷方式 */
-    brand: site.brand,
+    brand: site.value.brand,
     /** GitHub 汇总（repos / stars / forks / openIssues / stacks / tags / orgs / size） */
     totals: g.totals,
     /** totals 的别名，兼容 {{ stats.repos }} 写法 */
@@ -61,11 +61,11 @@ export function buildVars(): Vars {
     },
     /** 项目 */
     projects: {
-      count: projects.length,
-      names: projects.map((p) => p.name),
-      slugs: projects.map((p) => p.slug),
+      count: projects.value.length,
+      names: projects.value.map((p) => p.name),
+      slugs: projects.value.map((p) => p.slug),
       featured: featuredProjects.value.map((p) => p.name),
-      list: projects,
+      list: projects.value,
     },
     /** 时间 */
     date: {

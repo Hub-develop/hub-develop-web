@@ -1,5 +1,5 @@
 {
-  "syncedAt": "2026-10-05T02:19:08.550Z",
+  "syncedAt": "2026-10-05T02:38:22.027Z",
   "tokenSource": "gh auth token",
   "orgs": [
     {
@@ -14,7 +14,7 @@
       "location": "",
       "avatar": "https://avatars.githubusercontent.com/u/334967912?v=4",
       "url": "https://github.com/Hub-develop",
-      "publicRepos": 1,
+      "publicRepos": 2,
       "followers": 0
     },
     {
@@ -29,7 +29,7 @@
       "location": "",
       "avatar": "https://avatars.githubusercontent.com/u/330414789?v=4",
       "url": "https://github.com/Hub-code-develop",
-      "publicRepos": 7,
+      "publicRepos": 8,
       "followers": 0
     },
     {
@@ -50,6 +50,58 @@
   ],
   "repos": [
     {
+      "owner": "Hub-develop",
+      "orgLabel": "Hub",
+      "name": "code-web",
+      "fullName": "Hub-develop/code-web",
+      "url": "https://github.com/Hub-develop/code-web",
+      "homepage": "https://code.hub-develop.top",
+      "description": "Hub-develop 开发者门户与文档中心（Vite + Vue3 + TS）",
+      "language": "Vue",
+      "topics": [],
+      "stars": 0,
+      "forks": 0,
+      "openIssues": 0,
+      "size": 0,
+      "archived": false,
+      "license": "",
+      "defaultBranch": "main",
+      "createdAt": "2026-10-05T02:19:30Z",
+      "pushedAt": "2026-10-05T02:19:41Z",
+      "languages": {
+        "Vue": 0.5957,
+        "TypeScript": 0.3029,
+        "CSS": 0.082,
+        "HTML": 0.0195
+      }
+    },
+    {
+      "owner": "Hub-code-develop",
+      "orgLabel": "Hub.code",
+      "name": "code-web",
+      "fullName": "Hub-code-develop/code-web",
+      "url": "https://github.com/Hub-code-develop/code-web",
+      "homepage": "https://code.hub-develop.top",
+      "description": "Hub-develop 开发者门户与文档中心（Vite + Vue3 + TS，自定义域 code.hub-develop.top）",
+      "language": "Vue",
+      "topics": [],
+      "stars": 0,
+      "forks": 0,
+      "openIssues": 0,
+      "size": 0,
+      "archived": false,
+      "license": "",
+      "defaultBranch": "main",
+      "createdAt": "2026-10-05T02:31:22Z",
+      "pushedAt": "2026-10-05T02:31:29Z",
+      "languages": {
+        "Vue": 0.5957,
+        "TypeScript": 0.3029,
+        "CSS": 0.082,
+        "HTML": 0.0195
+      }
+    },
+    {
       "owner": "Hub-code-develop",
       "orgLabel": "Hub.code",
       "name": "MChub",
@@ -67,7 +119,7 @@
       "license": "AGPL-3.0",
       "defaultBranch": "main",
       "createdAt": "2026-09-18T23:32:54Z",
-      "pushedAt": "2026-10-04T23:14:40Z",
+      "pushedAt": "2026-10-05T02:28:13Z",
       "languages": {
         "C#": 0.9833,
         "Vue": 0.0038,
@@ -238,9 +290,19 @@
       "weight": 3.1551
     },
     {
+      "name": "Vue",
+      "repos": 4,
+      "weight": 1.1952
+    },
+    {
       "name": "Python",
       "repos": 2,
       "weight": 0.8255
+    },
+    {
+      "name": "TypeScript",
+      "repos": 3,
+      "weight": 0.6071
     },
     {
       "name": "Shell",
@@ -253,6 +315,11 @@
       "weight": 0.3448
     },
     {
+      "name": "CSS",
+      "repos": 4,
+      "weight": 0.1645
+    },
+    {
       "name": "C++",
       "repos": 2,
       "weight": 0.0664
@@ -263,9 +330,9 @@
       "weight": 0.0493
     },
     {
-      "name": "Vue",
-      "repos": 2,
-      "weight": 0.0038
+      "name": "HTML",
+      "repos": 4,
+      "weight": 0.0412
     },
     {
       "name": "Inno Setup",
@@ -283,19 +350,9 @@
       "weight": 0.0023
     },
     {
-      "name": "HTML",
-      "repos": 2,
-      "weight": 0.0022
-    },
-    {
       "name": "Assembly",
       "repos": 1,
       "weight": 0.0022
-    },
-    {
-      "name": "TypeScript",
-      "repos": 1,
-      "weight": 0.0013
     },
     {
       "name": "PowerShell",
@@ -316,11 +373,6 @@
       "name": "XSLT",
       "repos": 1,
       "weight": 0.0006
-    },
-    {
-      "name": "CSS",
-      "repos": 2,
-      "weight": 0.0005
     },
     {
       "name": "F#",
@@ -429,6 +481,14 @@
       "count": 1
     },
     {
+      "name": "CSS",
+      "count": 1
+    },
+    {
+      "name": "HTML",
+      "count": 1
+    },
+    {
       "name": "IL Assembly",
       "count": 1
     },
@@ -439,15 +499,23 @@
     {
       "name": "Shell",
       "count": 1
+    },
+    {
+      "name": "TypeScript",
+      "count": 1
+    },
+    {
+      "name": "Vue",
+      "count": 1
     }
   ],
   "totals": {
-    "repos": 6,
+    "repos": 8,
     "stars": 0,
     "forks": 0,
     "openIssues": 5,
     "stacks": 34,
-    "tags": 9,
+    "tags": 13,
     "orgs": 3,
     "size": 220321
   }

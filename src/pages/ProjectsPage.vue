@@ -10,10 +10,10 @@ const filter = ref<Filter>('all')
 
 const languages = computed(() => {
   const set = new Set<string>()
-  for (const p of projects) if (p.github.language) set.add(p.github.language)
+  for (const p of projects.value) if (p.github.language) set.add(p.github.language)
   return [...set].sort()
 })
-const hasOther = computed(() => projects.some((p) => !p.github.language))
+const hasOther = computed(() => projects.value.some((p) => !p.github.language))
 
 const filters = computed(() => [
   { key: 'all', label: t('projects.all') },
@@ -22,9 +22,9 @@ const filters = computed(() => [
 ])
 
 const list = computed(() => {
-  if (filter.value === 'all') return projects
-  if (filter.value === '__other__') return projects.filter((p) => !p.github.language)
-  return projects.filter((p) => p.github.language === filter.value)
+  if (filter.value === 'all') return projects.value
+  if (filter.value === '__other__') return projects.value.filter((p) => !p.github.language)
+  return projects.value.filter((p) => p.github.language === filter.value)
 })
 </script>
 

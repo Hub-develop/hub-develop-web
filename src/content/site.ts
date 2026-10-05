@@ -3,7 +3,7 @@
  * ------------------------------------------------------------
  * 网站的每一句可见文案、每一个链接，都从这里读取。
  * 现在支持中文 / English：siteZH 与 siteEN 是两份完整配置，
- * 导出的 site 是一个会随 locale 就地切换的响应式对象，
+ * 导出的 site 是一个【随 locale 派生的 computed】，不再写回源对象，
  * 组件无需改动访问方式（仍可用 site.hero.title 等）。
  *
  *   site.brand      品牌名 / 链接 / 邮箱
@@ -15,7 +15,7 @@
  *   site.seo        各页面 <title> / 描述
  * ============================================================ */
 
-import { reactive, watch } from 'vue'
+import { computed } from 'vue'
 import { locale } from '@/i18n'
 import type { Locale } from '@/i18n'
 import { projects, featuredProjects } from './projects'
@@ -426,21 +426,12 @@ const siteEN: SiteConfig = {
 }
 
 /* ---------------------------------------------------------- */
-/*  导出：随 locale 就地切换的响应式对象                          */
+/*  导出：由 locale 派生的只读响应式配置                          */
 /* ---------------------------------------------------------- */
-export const site = reactive<SiteConfig>(locale.value === 'en' ? siteEN : siteZH)
-
-watch(locale, (l) => {
-  const src = l === 'en' ? siteEN : siteZH
-  site.brand = src.brand
-  site.nav = src.nav
-  site.socials = src.socials
-  site.hero = src.hero
-  site.about = src.about
-  site.contact = src.contact
-  site.footer = src.footer
-  site.seo = src.seo
-})
+/*  关键修复：site 不再是对 siteZH / siteEN 源对象的响应式代理，
+ *  而是随 locale 重新求值的 computed —— 切换语言时只是换一份新的
+ *  配置对象，绝不会写回 / 污染源对象，因此 ZH↔EN 任意方向都正确。 */
+export const site = computed<SiteConfig>(() => (locale.value === 'en' ? siteEN : siteZH))
 
 export { projects, featuredProjects }
 export type { Project, ProjectStatus, ProjectLink } from './projects'

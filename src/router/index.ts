@@ -7,13 +7,13 @@ const routes: RouteRecordRaw[] = [
     path: '/',
     name: 'home',
     component: () => import('@/pages/HomePage.vue'),
-    meta: { title: site.seo.home.title, description: site.seo.home.description },
+    meta: { title: site.value.seo.home.title, description: site.value.seo.home.description },
   },
   {
     path: '/projects',
     name: 'projects',
     component: () => import('@/pages/ProjectsPage.vue'),
-    meta: { title: site.seo.projects.title, description: site.seo.projects.description },
+    meta: { title: site.value.seo.projects.title, description: site.value.seo.projects.description },
   },
   {
     path: '/projects/:slug',
@@ -28,32 +28,32 @@ const routes: RouteRecordRaw[] = [
       }
       return true
     },
-    meta: { title: `项目 · ${site.brand.name}` },
+    meta: { title: `项目 · ${site.value.brand.name}` },
   },
   {
     path: '/about',
     name: 'about',
     component: () => import('@/pages/AboutPage.vue'),
-    meta: { title: site.seo.about.title, description: site.seo.about.description },
+    meta: { title: site.value.seo.about.title, description: site.value.seo.about.description },
   },
   {
     path: '/contact',
     name: 'contact',
     component: () => import('@/pages/ContactPage.vue'),
-    meta: { title: site.seo.contact.title, description: site.seo.contact.description },
+    meta: { title: site.value.seo.contact.title, description: site.value.seo.contact.description },
   },
   {
     path: '/projects/unknown/:slug',
     name: 'project-missing',
     component: () => import('@/pages/NotFoundPage.vue'),
     props: true,
-    meta: { title: site.seo.notFound.title },
+    meta: { title: site.value.seo.notFound.title },
   },
   {
     path: '/:pathMatch(.*)*',
     name: 'not-found',
     component: () => import('@/pages/NotFoundPage.vue'),
-    meta: { title: site.seo.notFound.title, description: site.seo.notFound.description },
+    meta: { title: site.value.seo.notFound.title, description: site.value.seo.notFound.description },
   },
 ]
 
@@ -69,7 +69,7 @@ const router = createRouter({
 
 router.afterEach((to) => {
   const title = to.meta.title as string | undefined
-  document.title = title ?? site.brand.name
+  document.title = title ?? site.value.brand.name
   const desc = to.meta.description as string | undefined
   if (desc) {
     const el = document.querySelector('meta[name="description"]')

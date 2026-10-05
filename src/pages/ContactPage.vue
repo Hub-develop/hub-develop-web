@@ -3,7 +3,7 @@ import { computed, ref } from 'vue'
 import { site } from '@/content/site'
 import { t } from '@/i18n/ui'
 
-const c = computed(() => site.contact)
+const c = computed(() => site.value.contact)
 const copied = ref<string | null>(null)
 
 async function copy(text: string) {

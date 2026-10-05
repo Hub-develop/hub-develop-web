@@ -3,7 +3,7 @@ import { computed } from 'vue'
 import { site } from '@/content/site'
 
 const year = new Date().getFullYear()
-const f = computed(() => site.footer)
+const f = computed(() => site.value.footer)
 </script>
 
 <template>

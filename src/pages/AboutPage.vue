@@ -3,7 +3,7 @@ import { computed } from 'vue'
 import { site } from '@/content/site'
 import { t } from '@/i18n/ui'
 
-const about = computed(() => site.about)
+const about = computed(() => site.value.about)
 </script>
 
 <template>

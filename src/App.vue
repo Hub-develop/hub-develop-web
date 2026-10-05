@@ -18,13 +18,13 @@ onMounted(() => {
 
 // 切换语言时，按当前路由重设 <title> 与 description（路由守卫只在路由变化时触发）
 function applyMetaForLocale() {
-  const seo = site.seo
+  const seo = site.value.seo
   const byName: Record<string, { title: string; description?: string }> = {
     home: seo.home,
     projects: seo.projects,
     about: seo.about,
     contact: seo.contact,
-    'project-detail': { title: `${site.brand.name} · ${site.brand.tagline}` },
+    'project-detail': { title: `${site.value.brand.name} · ${site.value.brand.tagline}` },
     'project-missing': seo.notFound,
     'not-found': seo.notFound,
   }

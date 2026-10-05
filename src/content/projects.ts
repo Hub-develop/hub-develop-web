@@ -12,11 +12,11 @@
  * 也就是说：仓库里加了新语言、改了描述、多了 star，重新构建后
  * 站点会自动跟着变；想补介绍，只改 overrides.ts。
  *
- * 全部文本按当前 locale 解析；切换语言时 projects / featuredProjects
- * / statusMeta 会就地重建，组件无需改动访问方式。
+ * 全部文本按当前 locale 解析；projects / featuredProjects / statusMeta
+ * 均为随 locale 派生的 computed，切换语言自动跟随，组件无需改动访问方式。
  * ============================================================ */
 
-import { computed, reactive, watch } from 'vue'
+import { computed } from 'vue'
 import { locale } from '@/i18n'
 import type { Locale } from '@/i18n'
 import { githubData, statusFromPushedAt } from './github'
@@ -148,31 +148,25 @@ function buildProject(repo: GitHubRepo, lang: Locale): Project {
   }
 }
 
-/** 全部项目（顺序即 GitHub 快照里的顺序：按最近推送） */
-export const projects = reactive<Project[]>(
+/** 全部项目（顺序即 GitHub 快照里的顺序：按最近推送）。随 locale 派生的 computed。 */
+export const projects = computed<Project[]>(() =>
   githubData.repos.map((r) => buildProject(r, locale.value)),
 )
 
-/** 语言切换时就地重建项目列表（名称 / 简介等随语言变化） */
-watch(locale, (l) => {
-  const next = githubData.repos.map((r) => buildProject(r, l))
-  projects.splice(0, projects.length, ...next)
-})
-
-/** 首页精选项目 */
-export const featuredProjects = computed(() => projects.filter((p) => p.featured))
+/** 首页精选项目（随 locale 自动跟随） */
+export const featuredProjects = computed(() => projects.value.filter((p) => p.featured))
 
 /** 按 slug 取单个项目 */
 export function getProject(slug: string): Project | undefined {
-  return projects.find((p) => p.slug === slug)
+  return projects.value.find((p) => p.slug === slug)
 }
 
 /** 取相邻项目（用于详情页的「上一个 / 下一个」） */
 export function getProjectNeighbors(slug: string): { prev?: Project; next?: Project } {
-  const i = projects.findIndex((p) => p.slug === slug)
+  const i = projects.value.findIndex((p) => p.slug === slug)
   if (i === -1) return {}
   return {
-    prev: i > 0 ? projects[i - 1] : undefined,
-    next: i < projects.length - 1 ? projects[i + 1] : undefined,
+    prev: i > 0 ? projects.value[i - 1] : undefined,
+    next: i < projects.value.length - 1 ? projects.value[i + 1] : undefined,
   }
 }
