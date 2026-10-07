@@ -12,12 +12,13 @@ import { ref } from 'vue'
 
 export const LOCALES = [
   { code: 'zh', native: '中文', htmlLang: 'zh-CN' },
+  { code: 'zht', native: '繁體中文', htmlLang: 'zh-Hant' },
   { code: 'en', native: 'English', htmlLang: 'en' },
   { code: 'ja', native: '日本語', htmlLang: 'ja' },
   { code: 'ko', native: '한국어', htmlLang: 'ko' },
 ] as const
 
-/** 由 LOCALES 推导出的语言代码联合类型：'zh' | 'en' | 'ja' | 'ko' */
+/** 由 LOCALES 推导出的语言代码联合类型：'zh' | 'zht' | 'en' | 'ja' | 'ko' */
 export type Locale = (typeof LOCALES)[number]['code']
 
 /** 所有受支持的语言代码 */
@@ -33,6 +34,8 @@ function detectLocale(): Locale {
   const saved = window.localStorage.getItem(STORAGE_KEY)
   if (saved && (LOCALE_CODES as string[]).includes(saved)) return saved as Locale
   const nav = window.navigator.language?.toLowerCase() ?? ''
+  // 繁体中文地区：zh-Hant / zh-TW / zh-HK / zh-MO 等（早于通用 zh 判定）
+  if (/hant|tw|hk|mo/.test(nav)) return 'zht'
   for (const l of LOCALES) {
     if (nav.startsWith(l.code)) return l.code
   }

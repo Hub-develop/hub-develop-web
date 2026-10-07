@@ -6,12 +6,14 @@
  * ============================================================ */
 
 import { zh } from './zh'
+import { zht } from './zht'
 import { en } from './en'
 import { ja } from './ja'
 import { ko } from './ko'
 
 export const uiTables: Record<string, Record<string, string>> = {
   zh,
+  zht,
   en,
   ja,
   ko,

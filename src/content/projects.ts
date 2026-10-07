@@ -95,6 +95,11 @@ const statusMetaAll: Record<Locale, Record<ProjectStatus, { label: string; hint:
     maintained: { label: '유지보수 중', hint: '기능이 안정적이며 필요에 따라 수정·반복' },
     beta: { label: '실험', hint: '초기 탐색 단계. 형태는 바뀔 수 있습니다' },
   },
+  zht: {
+    active: { label: '更新中', hint: '正在積極開發，持續有新提交' },
+    maintained: { label: '維護中', hint: '功能趨於穩定，按需修復與迭代' },
+    beta: { label: '實驗', hint: '早期探索階段，形態仍可能變化' },
+  },
 }
 export const statusMeta = computed(
   () => statusMetaAll[locale.value] ?? statusMetaAll[DEFAULT_LOCALE],
@@ -125,6 +130,7 @@ const linkLabels: Record<Locale, { github: string; homepage: string; issues: str
   en: { github: 'GitHub', homepage: 'Homepage', issues: 'Report issue', noDesc: '(No description yet)' },
   ja: { github: 'GitHub', homepage: 'ホームページ', issues: 'Issue を報告', noDesc: '（説明なし）' },
   ko: { github: 'GitHub', homepage: '홈페이지', issues: 'Issue 신고', noDesc: '（설명 없음）' },
+  zht: { github: 'GitHub', homepage: '主頁', issues: '問題反饋', noDesc: '（暫無描述）' },
 }
 
 function buildProject(repo: GitHubRepo, lang: Locale): Project {
