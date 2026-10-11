@@ -178,7 +178,7 @@ const brand = (lang: Locale) => ({
     ja: 'Hub-develop のオープンソースプロジェクトと能力の総覧。',
     ko: 'Hub-develop의 오픈소스 프로젝트와 역량 총람.',
   }),
-  domain: 'hub-develop.top',
+  domain: 'mchub.code.hub-develop.top',
   repo,
   email,
 })
