@@ -1,13 +1,18 @@
 <script setup lang="ts">
 import { computed } from 'vue'
 import Hero from '@/components/Hero.vue'
-import ProjectCard from '@/components/ProjectCard.vue'
-import { site, featuredProjects } from '@/content/site'
+import ProjectRail from '@/components/ProjectRail.vue'
+import { site, featuredProjects, projects } from '@/content/site'
 import { renderRich } from '@/utils/rich'
 import { useGithub } from '@/content/github'
 import { t } from '@/i18n/ui'
 
 const about = computed(() => site.value.about)
+
+/** 首页横向轨道：优先精选项目，否则取前 8 个 */
+const railProjects = computed(() =>
+  featuredProjects.value.length ? featuredProjects.value : projects.value.slice(0, 8),
+)
 
 /** GitHub 快照（响应式：运行时刷新后自动更新） */
 const { data: gh } = useGithub()
@@ -21,22 +26,17 @@ const pct = (w: number) => `${Math.max(4, Math.round((w / maxWeight.value) * 100
   <div>
     <Hero />
 
-    <!-- 精选项目 -->
-    <section class="section">
-      <div class="container">
-        <div class="head" v-reveal>
-          <div class="section-head">
-            <p class="section-kicker">// featured</p>
-            <h2 class="section-title">{{ t('home.featuredTitle') }}</h2>
-            <p class="lead">{{ t('home.featuredLead') }}</p>
-          </div>
-          <RouterLink class="link-arrow head__more" to="/projects">{{ t('home.allProjects') }}</RouterLink>
-        </div>
-        <div class="grid">
-          <ProjectCard v-for="p in featuredProjects" :key="p.slug" :project="p" />
-        </div>
+    <!-- 精选项目（hyliu.me 横向滚动轨道） -->
+    <ProjectRail
+      :projects="railProjects"
+      kicker="// featured"
+      :title="t('home.featuredTitle')"
+    />
+    <div class="container">
+      <div class="rail-more">
+        <RouterLink class="link-arrow" to="/projects">{{ t('home.allProjects') }}</RouterLink>
       </div>
-    </section>
+    </div>
 
     <!-- 技术栈 & 标签（实时来自 GitHub，非写死） -->
     <section class="section section--soft">
@@ -124,11 +124,8 @@ const pct = (w: number) => `${Math.max(4, Math.round((w / maxWeight.value) * 100
 .head__more {
   margin-bottom: 0.3rem;
 }
-.grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(310px, 1fr));
-  gap: 1.1rem;
-  margin-top: 2.6rem;
+.rail-more {
+  margin-top: 1.8rem;
 }
 
 /* ---------- 技术栈 ---------- */

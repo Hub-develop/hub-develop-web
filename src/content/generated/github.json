@@ -1,5 +1,5 @@
 {
-  "syncedAt": "2026-10-05T02:38:22.027Z",
+  "syncedAt": "2026-10-11T13:29:58.755Z",
   "tokenSource": "gh auth token",
   "orgs": [
     {
@@ -14,7 +14,7 @@
       "location": "",
       "avatar": "https://avatars.githubusercontent.com/u/334967912?v=4",
       "url": "https://github.com/Hub-develop",
-      "publicRepos": 2,
+      "publicRepos": 1,
       "followers": 0
     },
     {
@@ -50,58 +50,6 @@
   ],
   "repos": [
     {
-      "owner": "Hub-develop",
-      "orgLabel": "Hub",
-      "name": "code-web",
-      "fullName": "Hub-develop/code-web",
-      "url": "https://github.com/Hub-develop/code-web",
-      "homepage": "https://code.hub-develop.top",
-      "description": "Hub-develop 开发者门户与文档中心（Vite + Vue3 + TS）",
-      "language": "Vue",
-      "topics": [],
-      "stars": 0,
-      "forks": 0,
-      "openIssues": 0,
-      "size": 0,
-      "archived": false,
-      "license": "",
-      "defaultBranch": "main",
-      "createdAt": "2026-10-05T02:19:30Z",
-      "pushedAt": "2026-10-05T02:19:41Z",
-      "languages": {
-        "Vue": 0.5957,
-        "TypeScript": 0.3029,
-        "CSS": 0.082,
-        "HTML": 0.0195
-      }
-    },
-    {
-      "owner": "Hub-code-develop",
-      "orgLabel": "Hub.code",
-      "name": "code-web",
-      "fullName": "Hub-code-develop/code-web",
-      "url": "https://github.com/Hub-code-develop/code-web",
-      "homepage": "https://code.hub-develop.top",
-      "description": "Hub-develop 开发者门户与文档中心（Vite + Vue3 + TS，自定义域 code.hub-develop.top）",
-      "language": "Vue",
-      "topics": [],
-      "stars": 0,
-      "forks": 0,
-      "openIssues": 0,
-      "size": 0,
-      "archived": false,
-      "license": "",
-      "defaultBranch": "main",
-      "createdAt": "2026-10-05T02:31:22Z",
-      "pushedAt": "2026-10-05T02:31:29Z",
-      "languages": {
-        "Vue": 0.5957,
-        "TypeScript": 0.3029,
-        "CSS": 0.082,
-        "HTML": 0.0195
-      }
-    },
-    {
       "owner": "Hub-code-develop",
       "orgLabel": "Hub.code",
       "name": "MChub",
@@ -114,24 +62,26 @@
       "stars": 0,
       "forks": 0,
       "openIssues": 0,
-      "size": 43101,
+      "size": 43565,
       "archived": false,
       "license": "AGPL-3.0",
       "defaultBranch": "main",
       "createdAt": "2026-09-18T23:32:54Z",
-      "pushedAt": "2026-10-05T02:28:13Z",
+      "pushedAt": "2026-10-11T13:08:13Z",
       "languages": {
-        "C#": 0.9833,
-        "Vue": 0.0038,
-        "Inno Setup": 0.0031,
-        "Shell": 0.0024,
-        "JavaScript": 0.0022,
-        "HTML": 0.0021,
-        "C++": 0.0013,
+        "C#": 0.9674,
+        "Java": 0.0114,
+        "Shell": 0.0052,
+        "Vue": 0.0036,
+        "Inno Setup": 0.003,
+        "C++": 0.003,
+        "JavaScript": 0.0021,
+        "HTML": 0.002,
         "PowerShell": 0.0006,
         "CSS": 0.0005,
+        "C": 0.0004,
         "F#": 0.0003,
-        "C": 0.0002,
+        "CMake": 0.0003,
         "Batchfile": 0.0002
       }
     },
@@ -148,16 +98,16 @@
       "stars": 0,
       "forks": 0,
       "openIssues": 5,
-      "size": 101226,
+      "size": 101238,
       "archived": false,
       "license": "MIT",
       "defaultBranch": "main",
       "createdAt": "2026-09-28T23:06:58Z",
-      "pushedAt": "2026-10-03T02:41:29Z",
+      "pushedAt": "2026-10-08T22:55:12Z",
       "languages": {
         "C#": 0.5284,
         "IL Assembly": 0.3448,
-        "C++": 0.0651,
+        "C++": 0.0652,
         "C": 0.0491,
         "Visual Basic .NET": 0.0027,
         "Assembly": 0.0022,
@@ -188,6 +138,59 @@
         "PHP": 0,
         "ASP.NET": 0,
         "Objective-C++": 0
+      }
+    },
+    {
+      "owner": "Hub-code-develop",
+      "orgLabel": "Hub.code",
+      "name": "WebHub",
+      "fullName": "Hub-code-develop/WebHub",
+      "url": "https://github.com/Hub-code-develop/WebHub",
+      "homepage": "",
+      "description": "Website and Network Security.",
+      "language": "C#",
+      "topics": [],
+      "stars": 0,
+      "forks": 0,
+      "openIssues": 0,
+      "size": 64,
+      "archived": false,
+      "license": "",
+      "defaultBranch": "main",
+      "createdAt": "2026-09-29T11:05:50Z",
+      "pushedAt": "2026-10-07T02:21:24Z",
+      "languages": {
+        "C#": 0.8331,
+        "Shell": 0.0851,
+        "Python": 0.0323,
+        "C": 0.0301,
+        "PowerShell": 0.0194
+      }
+    },
+    {
+      "owner": "Hub-code-develop",
+      "orgLabel": "Hub.code",
+      "name": "code-web",
+      "fullName": "Hub-code-develop/code-web",
+      "url": "https://github.com/Hub-code-develop/code-web",
+      "homepage": "https://code.hub-develop.top",
+      "description": "Hub-develop 开发者门户与文档中心（Vite + Vue3 + TS，自定义域 code.hub-develop.top）",
+      "language": "Vue",
+      "topics": [],
+      "stars": 0,
+      "forks": 0,
+      "openIssues": 0,
+      "size": 2950,
+      "archived": false,
+      "license": "",
+      "defaultBranch": "main",
+      "createdAt": "2026-10-05T02:31:22Z",
+      "pushedAt": "2026-10-05T07:19:32Z",
+      "languages": {
+        "Vue": 0.5336,
+        "TypeScript": 0.2658,
+        "CSS": 0.1612,
+        "HTML": 0.0395
       }
     },
     {
@@ -241,27 +244,6 @@
     {
       "owner": "Hub-code-develop",
       "orgLabel": "Hub.code",
-      "name": "WebHub",
-      "fullName": "Hub-code-develop/WebHub",
-      "url": "https://github.com/Hub-code-develop/WebHub",
-      "homepage": "",
-      "description": "Website and Network Security.",
-      "language": "",
-      "topics": [],
-      "stars": 0,
-      "forks": 0,
-      "openIssues": 0,
-      "size": 0,
-      "archived": false,
-      "license": "",
-      "defaultBranch": "main",
-      "createdAt": "2026-09-29T11:05:50Z",
-      "pushedAt": "2026-09-29T11:05:51Z",
-      "languages": {}
-    },
-    {
-      "owner": "Hub-code-develop",
-      "orgLabel": "Hub.code",
       "name": "CodeHub-FluentUI",
       "fullName": "Hub-code-develop/CodeHub-FluentUI",
       "url": "https://github.com/Hub-code-develop/CodeHub-FluentUI",
@@ -286,28 +268,23 @@
   "stacks": [
     {
       "name": "C#",
-      "repos": 5,
-      "weight": 3.1551
-    },
-    {
-      "name": "Vue",
-      "repos": 4,
-      "weight": 1.1952
+      "repos": 6,
+      "weight": 3.9723
     },
     {
       "name": "Python",
-      "repos": 2,
-      "weight": 0.8255
-    },
-    {
-      "name": "TypeScript",
       "repos": 3,
-      "weight": 0.6071
+      "weight": 0.8578
     },
     {
       "name": "Shell",
+      "repos": 4,
+      "weight": 0.6236
+    },
+    {
+      "name": "Vue",
       "repos": 3,
-      "weight": 0.5357
+      "weight": 0.5372
     },
     {
       "name": "IL Assembly",
@@ -315,29 +292,44 @@
       "weight": 0.3448
     },
     {
+      "name": "TypeScript",
+      "repos": 2,
+      "weight": 0.2671
+    },
+    {
       "name": "CSS",
-      "repos": 4,
-      "weight": 0.1645
+      "repos": 3,
+      "weight": 0.1617
+    },
+    {
+      "name": "C",
+      "repos": 3,
+      "weight": 0.0796
     },
     {
       "name": "C++",
       "repos": 2,
-      "weight": 0.0664
-    },
-    {
-      "name": "C",
-      "repos": 2,
-      "weight": 0.0493
+      "weight": 0.0682
     },
     {
       "name": "HTML",
-      "repos": 4,
-      "weight": 0.0412
+      "repos": 3,
+      "weight": 0.0416
+    },
+    {
+      "name": "PowerShell",
+      "repos": 3,
+      "weight": 0.0203
+    },
+    {
+      "name": "Java",
+      "repos": 2,
+      "weight": 0.0114
     },
     {
       "name": "Inno Setup",
       "repos": 1,
-      "weight": 0.0031
+      "weight": 0.003
     },
     {
       "name": "Visual Basic .NET",
@@ -347,7 +339,7 @@
     {
       "name": "JavaScript",
       "repos": 2,
-      "weight": 0.0023
+      "weight": 0.0022
     },
     {
       "name": "Assembly",
@@ -355,14 +347,9 @@
       "weight": 0.0022
     },
     {
-      "name": "PowerShell",
-      "repos": 2,
-      "weight": 0.0009
-    },
-    {
       "name": "CMake",
-      "repos": 1,
-      "weight": 0.0009
+      "repos": 2,
+      "weight": 0.0012
     },
     {
       "name": "Roff",
@@ -416,11 +403,6 @@
     },
     {
       "name": "Dockerfile",
-      "repos": 1,
-      "weight": 0
-    },
-    {
-      "name": "Java",
       "repos": 1,
       "weight": 0
     },
@@ -493,6 +475,14 @@
       "count": 1
     },
     {
+      "name": "Java",
+      "count": 1
+    },
+    {
+      "name": "PowerShell",
+      "count": 1
+    },
+    {
       "name": "Python",
       "count": 1
     },
@@ -510,13 +500,13 @@
     }
   ],
   "totals": {
-    "repos": 8,
+    "repos": 7,
     "stars": 0,
     "forks": 0,
     "openIssues": 5,
     "stacks": 34,
-    "tags": 13,
+    "tags": 15,
     "orgs": 3,
-    "size": 220321
+    "size": 223811
   }
 }
