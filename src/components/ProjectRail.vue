@@ -55,11 +55,12 @@ function paint() {
   const rect = section.value.getBoundingClientRect()
   const vh = window.innerHeight
   // 视差窗口：section 顶部从「刚进入视口底部」(rect.top=vh) 到「接近视口顶部」
-  // (rect.top≈0.12vh) 的过程中，轨道从起点平移到终点。这样当 section 仍舒适可见时，
+  // (rect.top≈0.2vh) 的过程中，轨道从起点平移到终点。这样当 section 仍舒适可见时，
   // 所有卡片就已完整显示，之后继续滚动轨道保持静止，不再提前截断内容（页脚始终可达）。
   const start = vh
-  const end = vh * 0.12
-  const p = Math.min(1, Math.max(0, (start - rect.top) / (start - end)))
+  const end = vh * 0.2
+  let p = Math.min(1, Math.max(0, (start - rect.top) / (start - end)))
+  p = p * p * (3 - 2 * p) // smoothstep 缓动：起步/收尾更柔和，避免生硬线性
   railInner.value.style.transform = `translateX(${-p * max}px)`
 }
 
@@ -162,7 +163,7 @@ function close() {
 }
 .rail-inner {
   display: inline-flex;
-  gap: 1.1rem;
+  gap: 1.25rem;
   padding: 0.4rem max(1.5rem, calc((100vw - 1120px) / 2)) 1rem;
   will-change: transform;
 }
@@ -170,7 +171,7 @@ function close() {
 /* 卡片（竖向，固定宽度，hyliu.me 风格） */
 .rcard {
   flex: none;
-  width: 300px;
+  width: 320px;
   text-align: left;
   display: flex;
   flex-direction: column;
@@ -250,8 +251,8 @@ function close() {
     padding: 3.6rem 0;
   }
   .rcard {
-    width: 80vw;
-    max-width: 300px;
+    width: 84vw;
+    max-width: 320px;
   }
 }
 </style>
