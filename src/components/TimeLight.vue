@@ -40,8 +40,8 @@ function initBlobs() {
     x: Math.random() * W,
     y: Math.random() * H,
     r: Math.max(W, H) * (0.28 + Math.random() * 0.22),
-    vx: (Math.random() - 0.5) * 0.16,
-    vy: (Math.random() - 0.5) * 0.16,
+    vx: (Math.random() - 0.5) * 0.24,
+    vy: (Math.random() - 0.5) * 0.24,
     hue: PALETTE[i % PALETTE.length],
   }))
 }
