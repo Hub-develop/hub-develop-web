@@ -8,13 +8,19 @@
     <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16.png" />
     <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
     <link rel="manifest" href="/site.webmanifest" />
-    <meta name="theme-color" content="#0b0f14" />
+    <meta name="theme-color" content="#0a0b10" />
     <meta
       name="description"
       content="Hub-develop —— CodeHub 的开源组织，专注跨平台桌面、服务端、文档框架与操作系统方向。"
     />
     <link rel="preconnect" href="https://api.github.com" crossorigin />
-    <title>Hub-develop · CodeHub 开源组织</title>
+    <title>Hub-develop</title>
+    <!-- 关键内联样式：加载 CSS/字体前就锁深色底，避免白底闪烁；内容先隐藏，字体就绪后由 main.ts 淡入 -->
+    <style>
+      html, body { margin: 0; background: #0a0b10; color: #f4f5f8; }
+      #app { opacity: 0; transition: opacity 0.45s ease; }
+      #app.ready { opacity: 1; }
+    </style>
     <!-- GitHub Pages SPA 回退：把 404.html 存下的深链接还原回来 -->
     <script>
       ;(function () {
@@ -27,8 +33,8 @@
         }
       })()
     </script>
-    <script type="module" crossorigin src="/assets/index-SZ33R5Vz.js"></script>
-    <link rel="stylesheet" crossorigin href="/assets/index-CJeTav-f.css">
+    <script type="module" crossorigin src="/assets/index-D5StHOgW.js"></script>
+    <link rel="stylesheet" crossorigin href="/assets/index-C5DsV9Bf.css">
   </head>
   <body>
     <div id="app"></div>
