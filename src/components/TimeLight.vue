@@ -19,8 +19,8 @@ const PALETTE: [number, number, number][] = [
   [124, 92, 255], // 紫
 ]
 
-// 游走速度系数：默认 0.24，用户要求「稍微快一点点」→ 0.30（约 +25%，不夸张）
-const SPEED = 0.3
+// 游走速度系数：0.24 起步，经 0.30，用户建议调到 0.50（明显更快但不失控）
+const SPEED = 0.5
 
 function resize() {
   const c = canvas.value
