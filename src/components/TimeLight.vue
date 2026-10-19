@@ -19,6 +19,9 @@ const PALETTE: [number, number, number][] = [
   [124, 92, 255], // 紫
 ]
 
+// 游走速度系数：默认 0.24，用户要求「稍微快一点点」→ 0.30（约 +25%，不夸张）
+const SPEED = 0.3
+
 function resize() {
   const c = canvas.value
   if (!c) return
@@ -40,8 +43,8 @@ function initBlobs() {
     x: Math.random() * W,
     y: Math.random() * H,
     r: Math.max(W, H) * (0.28 + Math.random() * 0.22),
-    vx: (Math.random() - 0.5) * 0.24,
-    vy: (Math.random() - 0.5) * 0.24,
+    vx: (Math.random() - 0.5) * SPEED,
+    vy: (Math.random() - 0.5) * SPEED,
     hue: PALETTE[i % PALETTE.length],
   }))
 }
