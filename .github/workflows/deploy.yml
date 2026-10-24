@@ -1,0 +1,68 @@
+name: Deploy hub-develop.top
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+# 必须：GitHub Pages 部署需要这两个权限
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+# 同一时间只跑一个 Pages 部署，避免互相覆盖
+concurrency:
+  group: pages
+  cancel-in-progress: true
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup .NET 10
+        uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: '10.0.x'
+
+      # 缓存 NuGet 包，加速还原
+      - name: Cache NuGet packages
+        uses: actions/cache@v4
+        with:
+          path: ~/.nuget/packages
+          key: nuget-${{ runner.os }}-${{ hashFiles('**/HubDevelop.Web.csproj') }}
+          restore-keys: |
+            nuget-${{ runner.os }}-
+
+      # Blazor WebAssembly 的 AOT 需要 wasm-tools workload
+      - name: Install wasm-tools workload (AOT)
+        run: dotnet workload install wasm-tools
+
+      - name: Publish (AOT)
+        run: dotnet publish HubDevelop.Web.csproj -c Release -o publish
+
+      # 自定义域名 hub-develop.top：确保 CNAME 落在产物根
+      - name: Ensure CNAME for custom domain
+        run: cp wwwroot/CNAME publish/wwwroot/CNAME
+
+      - name: Setup Pages
+        uses: actions/configure-pages@v5
+
+      - name: Upload Pages artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: publish/wwwroot
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4

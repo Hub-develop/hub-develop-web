@@ -1,0 +1,16 @@
+@inject IJSRuntime JS
+
+<canvas id="bg-canvas" class="bg-canvas" aria-hidden="true"></canvas>
+
+@code {
+    // 当前默认走真 WebGL 极光；Byta.GL 的 WebGL 后端就绪后，把这里换成 BytaGLBackground 即可。
+    private readonly IBackgroundRenderer _renderer = new WebGLAurora();
+
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
+        if (firstRender)
+        {
+            await _renderer.StartAsync("bg-canvas", JS);
+        }
+    }
+}

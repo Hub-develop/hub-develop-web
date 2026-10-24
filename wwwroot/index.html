@@ -13,29 +13,16 @@
       name="description"
       content="Hub-develop —— CodeHub 的开源组织，专注跨平台桌面、服务端、文档框架与操作系统方向。"
     />
-    <link rel="preconnect" href="https://api.github.com" crossorigin />
     <title>Hub-develop</title>
-    <!-- 关键内联样式：加载 CSS/字体前就锁深色底，避免白底闪烁；内容先隐藏，字体就绪后由 main.ts 淡入 -->
+    <link href="css/app.css" rel="stylesheet" />
+    <!-- 加载前就锁深色底，避免白屏闪烁 -->
     <style>
-      html, body { margin: 0; background: #0a0b10; color: #f4f5f8; }
-      #app { opacity: 0; transition: opacity 0.45s ease; }
-      #app.ready { opacity: 1; }
+      html, body { background: #0a0b10; }
     </style>
-    <!-- GitHub Pages SPA 回退：把 404.html 存下的深链接还原回来 -->
-    <script>
-      ;(function () {
-        var redirect = sessionStorage.getItem('redirect')
-        if (redirect) {
-          sessionStorage.removeItem('redirect')
-          if (redirect !== location.href) {
-            history.replaceState(null, null, redirect)
-          }
-        }
-      })()
-    </script>
   </head>
   <body>
     <div id="app"></div>
-    <script type="module" src="/src/main.ts"></script>
+    <script src="app.js"></script>
+    <script src="_framework/blazor.webassembly.js"></script>
   </body>
 </html>

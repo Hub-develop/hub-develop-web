@@ -1,0 +1,149 @@
+:root {
+  --bg: #0a0b10;
+  --fg: #f4f5f8;
+  --muted: rgba(244, 245, 248, 0.62);
+  --accent: #6feec2;
+  --panel: rgba(16, 18, 26, 0.72);
+  --panel-border: rgba(111, 238, 194, 0.22);
+}
+
+@font-face {
+  font-family: 'AlimamaFangYuanTi VF';
+  src: url('/fonts/AlimamaFangYuanTiVF.woff2') format('woff2');
+  font-weight: 100 900;
+  font-display: swap;
+}
+
+* { box-sizing: border-box; }
+
+html, body {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  background: var(--bg);
+  color: var(--fg);
+  font-family: 'AlimamaFangYuanTi VF', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang SC', 'Microsoft YaHei', sans-serif;
+  overflow: hidden;
+}
+
+/* 背景画布：全屏铺底，不拦截鼠标 */
+.bg-canvas {
+  position: fixed;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 0;
+  display: block;
+  pointer-events: none;
+}
+
+.core {
+  position: relative;
+  z-index: 1;
+  height: 100%;
+}
+
+.core__content {
+  position: relative;
+  z-index: 1;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 0 1.5rem;
+  user-select: none;
+}
+
+.core__title {
+  margin: 0;
+  font-size: clamp(3rem, 12vw, 9rem);
+  font-weight: 800;
+  letter-spacing: 0.04em;
+  background: linear-gradient(120deg, #ffffff 0%, var(--accent) 55%, #56b5ff 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  text-shadow: 0 0 40px rgba(111, 238, 194, 0.18);
+}
+
+.core__tagline {
+  margin: 1.2rem 0 0;
+  max-width: 32rem;
+  font-size: clamp(0.95rem, 2.6vw, 1.25rem);
+  line-height: 1.7;
+  color: var(--muted);
+}
+
+/* 左下角可收起悬浮球 */
+.fab {
+  position: fixed;
+  left: 1.25rem;
+  bottom: 1.25rem;
+  z-index: 3;
+  display: flex;
+  flex-direction: column-reverse;
+  align-items: flex-start;
+  gap: 0.75rem;
+}
+
+.fab__btn {
+  width: 3rem;
+  height: 3rem;
+  border-radius: 50%;
+  border: 1px solid var(--panel-border);
+  background: var(--panel);
+  color: var(--fg);
+  font-size: 1.4rem;
+  line-height: 1;
+  cursor: pointer;
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  box-shadow: 0 6px 24px rgba(0, 0, 0, 0.35);
+  transition: transform 0.18s ease, border-color 0.18s ease;
+}
+
+.fab__btn:hover {
+  transform: translateY(-2px);
+  border-color: var(--accent);
+}
+
+.fab__glyph {
+  display: block;
+  margin-top: -2px;
+}
+
+.fab__panel {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  padding: 0.75rem;
+  border-radius: 14px;
+  background: var(--panel);
+  border: 1px solid var(--panel-border);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  box-shadow: 0 6px 24px rgba(0, 0, 0, 0.35);
+  animation: fab-in 0.18s ease;
+}
+
+@keyframes fab-in {
+  from { opacity: 0; transform: translateY(6px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+.fab__link {
+  text-decoration: none;
+  color: var(--fg);
+  font-size: 0.95rem;
+  padding: 0.35rem 0.6rem;
+  border-radius: 8px;
+  white-space: nowrap;
+  transition: background 0.15s ease, color 0.15s ease;
+}
+
+.fab__link:hover {
+  background: rgba(111, 238, 194, 0.14);
+  color: var(--accent);
+}

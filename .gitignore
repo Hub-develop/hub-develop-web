@@ -1,25 +1,25 @@
-# Logs
-logs
-*.log
-npm-debug.log*
-
-# Dependencies
-node_modules
-.pnp
-.pnp.js
-
 # Build output
-dist
-dist-ssr
-*.local
+bin/
+obj/
+
+# .NET / NuGet
+*.user
+*.suo
+.vs/
+artifacts/
+
+# Publish output (CI publishes to GitHub Pages)
+publish/
 
 # Editor / OS
 .vscode/*
 !.vscode/extensions.json
 .idea
 .DS_Store
-*.suo
-*.ntvs*
-*.njsproj
-*.sln
-*.sw?
+Thumbs.db
+
+# Local
+*.local
+
+# WorkBuddy 工具数据（记忆/会话，不进仓库）
+.workbuddy/
